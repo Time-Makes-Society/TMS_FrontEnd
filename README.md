@@ -1,8 +1,7 @@
-# React + Vite
+# vite 사용
+- webpack 대신 빌드 속도가 빠른 vite를 사용하였다.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 추가 라이브러리
 
-Currently, two official plugins are available:
+1. sass
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
