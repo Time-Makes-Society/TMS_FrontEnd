@@ -1,0 +1,31 @@
+.start-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding:0 56.5px;
+}
+.start-logo{
+    display: block;
+    width: 83px;
+    height: 35px;
+    margin-bottom: 182.66px;
+}
+.login-button{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    padding: 12px 55px;
+    background-color: #E9E9E9;
+    color: #9F9E9E;
+    margin-bottom: 11px;
+}
+.signup-button{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    padding: 12px 55px;
+    background-color: #9F9E9E;
+    color: #FFFFFF;
+}
