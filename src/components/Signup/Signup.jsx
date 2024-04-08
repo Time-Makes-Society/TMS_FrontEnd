@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import backward from '../../assets/backward.svg';
+
 function Signup() {
     const navigate = useNavigate();
     const handleSubmit = () => {
