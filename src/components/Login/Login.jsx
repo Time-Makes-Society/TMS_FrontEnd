@@ -8,9 +8,13 @@ function Login() {
     Id: '',
     Password: '',
   })
+  const [showPassWord,setShowPassWord] = useState(false);
   const navigate=useNavigate()
   const handleBack=()=>{
     navigate('/')
+  }
+  const handleShowPassWord=()=>{
+    setShowPassWord(!showPassWord)
   }
   return (
     <>
@@ -22,9 +26,9 @@ function Login() {
       <form className='login-content-wrap'>
         <img src={Tms} className='login-logo' alt='TmsLogo' />
         <input placeholder='아이디' className='login-input' />
-        <input placeholder='비밀번호' className='login-input' />
+        <input placeholder='비밀번호' type={showPassWord? 'text':'password'} className='login-input' />
         <label className='login-checkbox'>
-          <input type="checkbox" className='pw-checkbox'/> 비밀번호 보기
+          <input type="checkbox" className='pw-checkbox' onClick={handleShowPassWord} /> 비밀번호 보기
         </label>
         <button type='submit' className='login-submit'>로그인</button>
         <Link to='/signup' className='goto-signup'>회원가입</Link>
