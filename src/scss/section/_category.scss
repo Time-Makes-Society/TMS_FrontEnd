@@ -9,7 +9,7 @@
         font-size: 18px;
         font-weight: 700;
         color: #000000;
-        
+        margin-bottom: 10px;
     }
     p{
         font-size: 12px;
@@ -22,6 +22,7 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        margin-bottom: 30px;
         .category-content{
             width: 94px;
             height: 94px;
@@ -36,9 +37,20 @@
             margin-right: 14px;
             margin-bottom: 14px;
         }
+        
+    }
+    .continue-button{
+        background-color: #333333;
+        color: #ffffff;
+        width: 310px;
+        height: 48px;
+        border-radius: 8px;
     }
    
 }
 .category-wrap .category-content-wrap .category-content:nth-of-type(3n){
     margin-right: 0;
+}
+.category-wrap .category-content-wrap .category-content:nth-of-type(7){
+    //margin-bottom: 20px;
 }

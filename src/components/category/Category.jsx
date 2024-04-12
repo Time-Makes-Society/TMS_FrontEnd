@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 const dummydata=[
     {id:1, name:'스포츠'},
     {id:2, name:'IT/과학'},
@@ -11,6 +11,9 @@ const dummydata=[
     {id:9, name:'국제'},
 ]
 function Category() {
+    const [activeCategory,setActiveCategory] =useState([]);
+    // toggle 만들기
+    // isActive 배열만들기
   return (
     <div className='category-wrap'>
         <div className='category-header'>
@@ -23,12 +26,12 @@ function Category() {
         <div className='category-content-wrap'>
             {dummydata.map((data)=>{
                 return (
-                    <div className='category-content'> {data.name} </div>
+                    <div className={`category-content ${isActive(data.id)?'active':''}`} key={data.id}>{data.name} </div>
                 )
-                   
-                
             })}
+            
         </div>
+        <button className='continue-button'>계속하기</button>
     </div>
   )
 }
