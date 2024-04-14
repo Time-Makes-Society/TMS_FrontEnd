@@ -24,13 +24,19 @@
     }
     .timeset-stick-wrap{
         margin-bottom: 84px;
+        height:370px;
         .timeset-stick{
             display: block;
             width: 140px;
             height: 27px;
             background-color: #e7e7e7;
             margin-bottom: 2px;
+            transition: all 500ms ease-in-out;
+            &.selected {
+                background-color: #0078FF;
+            }
         }
+        
     }
     
     button{

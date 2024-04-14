@@ -36,6 +36,7 @@
             align-items: center;
             margin-right: 14px;
             margin-bottom: 14px;
+            transition: all 500ms ease-in;
             &.active{
                 color: #ffffff;
                 background-color: #0078FF;
