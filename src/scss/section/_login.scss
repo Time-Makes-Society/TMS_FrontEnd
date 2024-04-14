@@ -72,6 +72,16 @@
             border: 1px solid #adadad;
             margin-right: 5px;
         }
+        .pw-checkbox:checked::before {
+            content: '✔'; /* 체크 표시 */
+            display: block;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+            background-color: #333; 
+            color: #fff; 
+        }
     }
     
     

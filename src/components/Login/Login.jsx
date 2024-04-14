@@ -13,6 +13,10 @@ function Login() {
   const handleBack=()=>{
     navigate('/')
   }
+  const handleLogin=()=>{
+    // API연결 추가해야함
+    navigate('/category')
+  }
   const handleShowPassWord=()=>{
     setShowPassWord(!showPassWord)
   }
@@ -28,9 +32,9 @@ function Login() {
         <input placeholder='아이디' className='login-input' />
         <input placeholder='비밀번호' type={showPassWord? 'text':'password'} className='login-input' />
         <label className='login-checkbox'>
-          <input type="checkbox" className='pw-checkbox' onClick={handleShowPassWord} /> 비밀번호 보기
+          <input type="checkbox" className={`pw-checkbox ${showPassWord ? 'active' : ''} `} checked={showPassWord} onClick={handleShowPassWord} /> 비밀번호 보기
         </label>
-        <button type='submit' className='login-submit'>로그인</button>
+        <button type='submit' className='login-submit' onClick={handleLogin}>로그인</button>
         <Link to='/signup' className='goto-signup'>회원가입</Link>
       </form>
     </>
