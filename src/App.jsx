@@ -5,10 +5,10 @@ import Start from './components/Start/Start'
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import Category from './components/category/Category';
+import TimeSet from './components/Timeset/TimeSet';
+import Main from './components/Main/Main'
 
 function App() {
-
-
   return (
     <BrowserRouter>
       <Routes>
@@ -16,6 +16,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/category' element={<Category/>}/>
+        <Route path='/timeset' element={<TimeSet/>}/>
+        <Route path = '/home' element={<Main/>}/>
       </Routes>
     </BrowserRouter>
   )
