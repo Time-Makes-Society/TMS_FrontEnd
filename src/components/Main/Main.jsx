@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 
 import Tms from '../../assets/main/T_M_S.svg';
-import feed from '../../assets/common/feed.svg';
-import user from '../../assets/common/user.svg';
-import home from '../../assets/common/home.svg';
+import Footer from '../common/Footer';
 const dummydata = [
   { id: 1, title: "달려드는 독보적의 지극히 바닥이듯 세습에 폭락하냐", newsCategory: "IT", imageUrl: 'https://post-phinf.pstatic.net/MjAyNDA0MTVfMjk4/MDAxNzEzMTM2MTE1MTk3.SAs0PYBs-nvaVMHe4IakLMR22apTqTprEQvr5k9tfrYg.eZ5IiKAyIBwaJahTMPm87INyDuTvKJx5fe1_x3BJEY4g.JPEG/05.jpg?type=w1200' },
   { id: 2, title: "김승찬", newsCategory: "스포츠", imageUrl: 'https://post-phinf.pstatic.net/MjAyNDA0MTVfMjk4/MDAxNzEzMTM2MTE1MTk3.SAs0PYBs-nvaVMHe4IakLMR22apTqTprEQvr5k9tfrYg.eZ5IiKAyIBwaJahTMPm87INyDuTvKJx5fe1_x3BJEY4g.JPEG/05.jpg?type=w1200' },
@@ -65,9 +63,7 @@ function Main() {
 
         ))}
       </div>
-      <footer className='footer-wrap'>
-
-      </footer>
+      <Footer footerState={'home'}/>
     </div>
   )
 }

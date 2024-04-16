@@ -7,7 +7,8 @@ import Login from './components/Login/Login';
 import Category from './components/category/Category';
 import TimeSet from './components/Timeset/TimeSet';
 import Main from './components/Main/Main'
-
+import Feed from './components/Feed/Feed';
+import Mypage from './components/Mypage/Mypage';
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,8 @@ function App() {
         <Route path='/category' element={<Category/>}/>
         <Route path='/timeset' element={<TimeSet/>}/>
         <Route path = '/home' element={<Main/>}/>
+        <Route path = '/feed' element={<Feed/>}/>
+        <Route path = '/mypage' element={<Mypage/>}/>
       </Routes>
     </BrowserRouter>
   )
