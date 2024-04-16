@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     padding: 15px;
+    position: relative;
     .tms-logo{
         display: block;
         width: 55px;
@@ -29,6 +30,8 @@
         width: 100%;
         overflow-x: auto;
         margin-bottom: 42px;
+        -ms-overflow-style:none; /* IE and Edge */
+        scrollbar-width:none;
         .live-content-wrap{
             display: flex;
             flex-direction: column;
@@ -73,7 +76,9 @@
         overflow: hidden;
         width: 100%;
         overflow-x: auto;
-        margin-bottom: 63.5px;
+        margin-bottom: 100px;
+        -ms-overflow-style:none; 
+        scrollbar-width:none;
         .recommend-content-wrap{
             display: flex;
             flex-direction: column;
@@ -105,4 +110,5 @@
             }
         }
     }
+    
 }
