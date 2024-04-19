@@ -9,6 +9,7 @@ import TimeSet from './components/Timeset/TimeSet';
 import Main from './components/Main/Main'
 import Feed from './components/Feed/Feed';
 import Mypage from './components/Mypage/Mypage';
+import FeedDetail from './components/Feed/FeedDetail';
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
         <Route path = '/home' element={<Main/>}/>
         <Route path = '/feed' element={<Feed/>}/>
         <Route path = '/mypage' element={<Mypage/>}/>
+        <Route path ='/feed_detail' element={<FeedDetail/>}/>
       </Routes>
     </BrowserRouter>
   )

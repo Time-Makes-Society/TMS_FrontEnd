@@ -1,0 +1,43 @@
+// - header css -
+.feedDetail-header-wrap{
+    width: 100%;
+    height: 51px;
+    padding: 12px 12px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    
+    .backward{
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-right: 10.37px;
+    }
+    .feedDetail-headername{
+        font-size: 14px;
+        font-weight: 700;
+        color: #000000;
+    }
+    ::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #cacaca;
+    }
+}
+.feedDetail-content-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40.6px 33.93px 0 33.93px;
+    .feedDetail-content-header{
+        font-size: 20px;
+        font-weight: 700;
+        color: #000000;
+    }
+}
