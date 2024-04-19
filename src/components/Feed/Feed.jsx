@@ -3,6 +3,7 @@ import Footer from '../common/Footer'
 
 import Scrab from '../../assets/feed/scrab.svg';
 import Option from '../../assets/feed/option.svg';
+import { Link } from 'react-router-dom';
 const dummydata = [
   { id: 1, imageUrl: 'https://imgnews.pstatic.net/image/015/2024/04/16/0004973630_001_20240416184701028.jpg?type=w647', title: '달려드는 독보적인 지극히 바닥이듯 세습에 폭락하나 개혁하네, 그러나 그 관점인 정중하다', publisher: '한겨레' },
   { id: 2, imageUrl: 'https://imgnews.pstatic.net/image/015/2024/04/16/0004973630_001_20240416184701028.jpg?type=w647', title: '달려드는 독보적인 지극히 바닥이듯 세습에 폭락하나 개혁하네, 그러나 그 관점인 정중하다', publisher: 'sbs' },
@@ -28,14 +29,14 @@ function Feed() {
   return (
     <div className='feed-wrap'>
       <div className='feed-header-wrap'>
-        <button className={feedState === '실시간' ? `feed-header active` : 'feed-header'} onClick={() => handleFeedState('실시간')}>실시간</button>
-        <button className={feedState === '추천' ? `feed-header active` : 'feed-header'} onClick={() => handleFeedState('추천')}>추천</button>
-        <button className={feedState === '스크랩' ? `feed-header active` : 'feed-header'} onClick={() => handleFeedState('스크랩')}>스크랩</button>
-        <span className='header-bar' />
+        <button className={feedState === '실시간' ? 'feed-header active' : 'feed-header'} onClick={() => handleFeedState('실시간')}>실시간</button>
+        <button className={feedState === '추천' ? 'feed-header active' : 'feed-header'} onClick={() => handleFeedState('추천')}>추천</button>
+        <button className={feedState === '스크랩' ? 'feed-header active' : 'feed-header'} onClick={() => handleFeedState('스크랩')}>스크랩</button>
+        
       </div>
       <div className='feed-content-wrap'>
         {liveFeedList.map((feed, index) => (
-          <div className='feed-content'>
+          <div className='feed-content' >
             <img src={feed.imageUrl} className='feed-image' alt='iamgeUrl' /> 
             <div className='feed-desc-wrap'>
               <p className='feed-desc-title'>{feed.title}</p>
@@ -45,9 +46,11 @@ function Feed() {
             </div>
             
           </div>
+          
         ))}
       </div>
-
+      
+        
       <Footer footerState={'feed'} />
     </div>
   )

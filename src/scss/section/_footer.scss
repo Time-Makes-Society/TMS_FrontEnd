@@ -4,10 +4,12 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding:14.3px 92.25px 49px 92.25px;
+    padding:14.3px 92.25px 17px 92.25px;
     position: fixed;
     left: 0;
     bottom: 0;
+    border-top: 1px solid #cacaca;
+    background-color: #ffffff;
     .footer-button{
         display: flex;
         justify-content: center;
@@ -24,6 +26,12 @@
         display: block;
         width: 24px;
         height: 24px;
+    }
+    
+}
+@media (min-width:768px){
+    .footer-wrap{
+        
     }
     
 }
