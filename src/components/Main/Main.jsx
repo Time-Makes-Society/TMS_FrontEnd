@@ -41,7 +41,7 @@ function Main() {
       <h3 className='title'>실시간 뉴스 기사</h3>
       <div className='live-wrap'>
         {liveArticle.map((article, index) => (
-          <Link to={'/feed_detail'}>
+          <Link to={`/feed_detail/${article.id}`}>
             <div key={index} className='live-content-wrap'>
             <img src={article.imageUrl} alt="News Image" className='live-content-image' />
             <div className='live-content-title-wrap'>
@@ -57,13 +57,16 @@ function Main() {
       <h3 className='title'>추천기사</h3>
       <div className='recommend-wrap'>
         {recommendArticle.map((article, index) => (
-          <div key={index} className='recommend-content-wrap'>
+          <Link to={`/feed_detail/${article.id}`}>
+            <div key={index} className='recommend-content-wrap'>
             <img src={article.imageUrl} alt="News Image" className='recommend-content-image' />
             <div className='recommend-content-title-wrap'>
               <h1 >{article.title}</h1>
               <p >{article.newsCategory}</p>
             </div>
           </div>
+          </Link>
+          
 
         ))}
       </div>

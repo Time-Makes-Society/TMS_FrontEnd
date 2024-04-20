@@ -1,0 +1,103 @@
+.mypage-header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15.82px 22.6px;
+    margin-bottom: 30px;
+    img {
+        display: block;
+        width: 27.92px;
+        height: 27.92px;
+    }
+
+    .option {
+        display: block;
+        width: 3.1px;
+        height: 15.82px;
+    }
+
+    h1 {
+        color: #000000;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+.profile-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 23px;
+    margin-bottom: 36.64px;
+    .profile-image {
+        width: 54.06px;
+        height: 54.06px;
+        border-radius: 50%;
+        background-color: #aaaaaa;
+        margin-right: 14.94px;
+    }
+
+    .profile-nickname-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+       
+        .profile-name-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h2 {
+                font-size: 18px;
+                font-weight: 600;
+                color: #000000;
+                margin-right: 7.36px;
+            }
+            img {
+                display: block;
+                width: 18.69px;
+                height: 18.69px;
+            }
+
+        }
+        p{
+            font-size: 14px;
+            font-weight: 400;
+            color: #000000;
+        }
+    }
+}
+
+
+// 통계 바 css
+.statistics-bar-wrap{
+    background-color: #f0f0f0;
+    padding: 16px;
+    .statistics-header-wrap{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .header-title{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            p{
+                color: #000000;
+                font-weight: 600;
+                font-size: 16px;
+            }
+            .time{
+                color: #0078FF;
+                font-weight: 700;
+                font-size: 24px;
+            }
+        }
+       
+        img{
+            display: block;
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
