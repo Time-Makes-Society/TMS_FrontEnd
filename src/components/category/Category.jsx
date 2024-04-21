@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { authActions } from '../../store/auth';
 const dummydata=[
     {id:1, name:'스포츠'},
     {id:2, name:'IT/과학'},
@@ -14,6 +17,7 @@ const dummydata=[
 function Category() {
     const [activeCategory,setActiveCategory] =useState([]);
     const navigate = useNavigate();
+    const auth = useSelector(state => state.auth.isAuthenticated)
     const handleCategory = (id) =>{
         if(activeCategory.includes(id)){
             setActiveCategory(activeCategory.filter(item => item !== id))
@@ -28,6 +32,7 @@ function Category() {
         navigate("/timeset")
         // - 선택한 카테고리 API통신 추가 코드 작성 -
     }
+    console.log("auth상태",auth)
   return (
     <div className='category-wrap'>
         <div className='category-header'>

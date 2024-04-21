@@ -10,8 +10,8 @@ function FeedContent({feedContent,feedState,contentSize}) {
         </p>
         <p className='feedDetail-content-date'>
           입력
-          <span style={{ marginLeft: '7px', marginRight: '7px' }}>{feedContent.date}</span>
-          방금전
+          <span style={{ marginLeft: '7px', marginRight: '7px' }}>{feedContent.createdDate}</span>
+          
           <span className='feedDetail-content-articlestate'>
             {feedState ? '기사요약' : '기사원문'}
           </span>
@@ -25,7 +25,7 @@ function FeedContent({feedContent,feedState,contentSize}) {
           <img src={comment} alt='like-image' />
           <span>{feedContent.comment_count}</span>
         </div>
-        <div className='feedDetail-content-image' style={{ backgroundImage: `${feedContent.ImageUrl}` }}>
+        <div className='feedDetail-content-image' style={{ backgroundImage: `${feedContent.image}` }}>
 
         </div>
         <p className={`${contentSize ? 'feedDetail-content-thebody active' : 'feedDetail-content-thebody'}`}>
