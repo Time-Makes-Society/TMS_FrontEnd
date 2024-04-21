@@ -7,11 +7,57 @@ import Profile from './Profile';
 import option from '../../assets/mypage/option.svg';
 import backward from '../../assets/backward.svg';
 import infoCircle from '../../assets/mypage/info-circle-line.svg';
+import Bar from './Bar';
+import Top from './Top';
+const dummydata = [
+  {
+    date:"mon",
+    summary:"3:00",
+    original:'6분',
+  },
+  {
+    date:"tue",
+    summary:"6:00",
+    original:'6분',
+  },
+  {
+    date:"wed",
+    summary:"8:00",
+    original:'6분',
+  },
+  {
+    date:"thu",
+    summary:"4:00",
+    original:'6분',
+  },
+  {
+    date:"fri",
+    summary:"15:00",
+    original:'6분',
+  },
+  {
+    date:"sat",
+    summary:"6:00",
+    original:'6분',
+  },
+  {
+    date:"sun",
+    summary:"4:00",
+    original:'6분',
+  },
+];
+const top4data=[
+  {id:1, category:'It', percentage:45},
+  {id:2, category:'경제', percentage:30},
+  {id:3, category:'엔터', percentage:20},
+  {id:4, category:'정치', percentage:5},
+]
 function Mypage() {
   const [userInfo, setUserInfo] = useState({
     name: '임형준',
     nickname: 'LHJ',
     time: "538",
+    
   })
   useEffect(() => {
     // -- userInfo api 통신 코드 -- 
@@ -34,18 +80,8 @@ function Mypage() {
         <img src={option} className='option' alt='option-image' />
       </div>
       <Profile userInfo={userInfo} />
-      <div className='statistics-bar-wrap'>
-        <div className='statistics-header-wrap'>
-          <div className='header-title'>
-            <p>{userInfo.name}님은</p>
-            <p> <span className='time'>{userInfo.time}분</span> 절약했어요!</p>
-          </div>
-          <img src={infoCircle} alt='infoCircle-image' />
-        </div>
-        <div className='bar-wrap'>
-          
-        </div>
-      </div>
+      <Bar userInfo={userInfo} dummydata={dummydata}/>
+      <Top top4data={top4data}/>
       <Footer footerState={'user'} />
     </>
   )
