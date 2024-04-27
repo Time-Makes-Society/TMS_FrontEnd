@@ -10,6 +10,7 @@ import Main from './components/Main/Main'
 import Feed from './components/Feed/Feed';
 import Mypage from './components/Mypage/Mypage';
 import FeedDetail from './components/Feed/FeedDetail/FeedDetail';
+import CommentModal from './components/Modal/CommentModal';
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
         <Route path = '/feed' element={<Feed/>}/>
         <Route path = '/mypage' element={<Mypage/>}/>
         <Route path ='/feed_detail/:id' element={<FeedDetail/>}/>
+        <Route path = '/modal' element={<CommentModal/>}/>
       </Routes>
     </BrowserRouter>
   )

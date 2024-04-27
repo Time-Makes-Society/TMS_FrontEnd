@@ -37,10 +37,9 @@ function FeedDetail({ feedType }) {
   const [feedContent, setFeedContent] = useState({});
   const [feedState, setFeedState] = useState(false);
   const [contentSize, setContentSize] = useState(false);
-  const [commentState, setCommentState] = useState(false);
   const { id } = useParams();
   console.log("feedDetail:", id)
-
+  
   const handleFeedState = () => {
     setFeedState(!feedState);
   }

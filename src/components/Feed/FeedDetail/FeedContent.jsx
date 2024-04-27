@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import like from '../../../assets/feedDetail/like.svg';
 import comment from '../../../assets/feedDetail/comment.svg';
+import { Link } from 'react-router-dom';
 function FeedContent({feedContent,feedState,contentSize}) {
+  const [commentModalState, setCommentModalState] = useState(false);
+  
   return (
     <div className='feedDetail-content-wrap'>
         <p className='feedDetail-content-header'>
@@ -22,7 +25,7 @@ function FeedContent({feedContent,feedState,contentSize}) {
         <div className='like-comment-wrap'>
           <img src={like} alt='like-image' />
           <span>{feedContent.like}</span>
-          <img src={comment} alt='like-image' />
+          <img src={comment} alt='comment-image' />
           <span>{feedContent.comment_count}</span>
         </div>
         <div className='feedDetail-content-image' style={{ backgroundImage: `${feedContent.image}` }}>
