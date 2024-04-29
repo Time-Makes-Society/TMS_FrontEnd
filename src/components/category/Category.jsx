@@ -18,6 +18,7 @@ function Category() {
     const [activeCategory,setActiveCategory] =useState([]);
     const navigate = useNavigate();
     const auth = useSelector(state => state.auth.isAuthenticated)
+    const login = useSelector(state => state.login.loginId)
     const handleCategory = (id) =>{
         if(activeCategory.includes(id)){
             setActiveCategory(activeCategory.filter(item => item !== id))
@@ -27,7 +28,7 @@ function Category() {
         }
     }
     console.log("activeCategory :" , activeCategory)
-
+    console.log('loginState: ',login)
     const handleContinue = () => {
         navigate("/timeset")
         // - 선택한 카테고리 API통신 추가 코드 작성 -
