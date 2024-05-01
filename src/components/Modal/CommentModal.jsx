@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
+import option from '../../assets/option.svg'
 const dummydata = [
   { id: 1, name: '집수리오형제', content: '달려드는 독보적의 바닥이듯 세습에 폭락하나' },
   { id: 2, name: '독수리오년째', content: '달려드는 독보적의 지극히 바닥이듯 세습에 폭락' },
@@ -21,7 +22,7 @@ function CommentModal({ articleId }) {
       }
     }
     fetchComment();
-  }, [commentData,buttonState])
+  }, [commentData, buttonState])
   const toggleButton = (title) => {
     setButtonState(title)
   }
@@ -35,18 +36,25 @@ function CommentModal({ articleId }) {
         <div className='button-wrap'>
           <button
             className={`${buttonState === '인기순' ? 'button active' : 'button'}`}
-            onClick={() =>toggleButton('인기순')}
+            onClick={() => toggleButton('인기순')}
           >인기순</button>
           <button
             className={`${buttonState === '최신순' ? 'button active' : 'button'}`}
-            onClick={() =>toggleButton('최신순')}
+            onClick={() => toggleButton('최신순')}
           >최신순</button>
         </div>
       </div>
-      <span className='line'/>
+      <span className='line' />
       <div className='content-wrap'>
         {commentData.map((comment, index) => (
-          <div className='content'>{comment.name} </div>
+          <div className='content'>
+            <div className='profile-wrap'>
+              <span className='profile' />
+              <p className='nickname'>{comment.name}</p>
+              <p className='text'>{comment.content}</p>
+            </div>
+            <img src={option} className='option' />
+          </div>
         ))}
       </div>
     </div>

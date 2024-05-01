@@ -6,10 +6,19 @@ import Tms from '../../assets/start/TmsLogo.svg';
 import { Link,useNavigate } from 'react-router-dom';
 import { authActions } from '../../store/auth';
 import axios from 'axios';
+import { loginActions } from '../../store/Login';
+const dummydata = [
+  {
+      "loginId": "lhj6364",
+      "password": "1234",
+      "memberName": "임형준",
+  }
+]
 function Login() {
-  const [enterValuse, setEnterValues] = useState({
-    Id: '',
-    Password: '',
+  const [enterValue, setEnterValues] = useState({
+    loginId: '',
+    password: '',
+    memberName:'임형준',
   })
   const dispatch = useDispatch()
   const [showPassWord,setShowPassWord] = useState(false);
@@ -17,11 +26,34 @@ function Login() {
   const handleBack=()=>{
     navigate('/')
   }
-  const handleLogin=()=>{
+  const handleInputChange=(identifier, value) => {
+    setEnterValues(preValues=>({
+      ...preValues,
+      [identifier]:value
+    }))
+    
+  }
+  const handleLogin=async(event)=>{
+    event.preventDefault();
     // -- Api post 연결 code --
+    // try{
+    //   await axios.post(`/api/login`,{
+    //     "loginId": enterValue.loginId,
+    //     "password": enterValue.password
+    //   })
+    // }
+    // catch(error){
+    //   new Error(error)
+    // }
+    
+    localStorage.setItem('loginId',enterValue.loginId)
+    localStorage.setItem('password',enterValue.password)
+    localStorage.setItem('memberName',enterValue.memberName)
+    dispatch(loginActions.login(enterValue))
     dispatch(authActions.login());
     navigate('/category');
   }
+  const passwordInputType = showPassWord ? 'text' : 'password';
   const handleShowPassWord=()=>{
     setShowPassWord(!showPassWord)
   }
@@ -34,10 +66,10 @@ function Login() {
 
       <form className='login-content-wrap' onSubmit={handleLogin}>
         <img src={Tms} className='login-logo' alt='TmsLogo' />
-        <input placeholder='아이디' className='login-input' />
-        <input placeholder='비밀번호' type={showPassWord? 'text':'password'} className='login-input' />
+        <input placeholder='아이디' id='loginId' name='loginId' className='login-input' onChange={(event)=> handleInputChange('loginId',event.target.value)}/>
+        <input placeholder='비밀번호' id='password' name='password' type={passwordInputType} className='login-input' onChange={(event)=> handleInputChange('password',event.target.value)} />
         <label className='login-checkbox'>
-          <input type="checkbox" className={`pw-checkbox ${showPassWord ? 'active' : ''} `} checked={showPassWord} onClick={handleShowPassWord} /> 비밀번호 보기
+          <input type="checkbox" className={`pw-checkbox ${showPassWord ? 'active' : ''} `} checked={showPassWord} onChange={handleShowPassWord} /> 비밀번호 보기
         </label>
         <button type='submit' className='login-submit' >로그인</button>
         <Link to='/signup' className='goto-signup'>회원가입</Link>

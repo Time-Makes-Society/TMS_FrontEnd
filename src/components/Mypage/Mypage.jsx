@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+
 import Footer from '../common/Footer';
 import Profile from './Profile';
-
+import { loginActions } from '../../store/Login';
 import option from '../../assets/mypage/option.svg';
 import backward from '../../assets/backward.svg';
 import infoCircle from '../../assets/mypage/info-circle-line.svg';
@@ -59,6 +62,31 @@ function Mypage() {
     time: "538",
     
   })
+  const loginId = localStorage.getItem('loginId');
+  const password = localStorage.getItem('password');
+  const memberName = localStorage.getItem('memberName');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  console.log('redux login state:',loginId);
+  console.log('redux password state', password);
+  const handleLogout=async()=>{
+    // - api 통신 코드 -
+    // try{
+    //   await axios.post('/api/logout',{
+    //     "loginId": loginId,
+    //     "password": password
+    //   })
+    // }
+    // catch(error){
+    //   new Error(error)
+    // }
+    localStorage.clear();
+    dispatch(loginActions.logout());
+    navigate('/login');
+  }
+  
+  
+
   useEffect(() => {
     // -- userInfo api 통신 코드 -- 
     /*const fetchUserInfo = async() => {
@@ -79,7 +107,7 @@ function Mypage() {
         <h1>마이페이지</h1>
         <img src={option} className='option' alt='option-image' />
       </div>
-      <Profile userInfo={userInfo} />
+      <Profile userInfo={userInfo} handleLogout={handleLogout}/>
       <Bar userInfo={userInfo} dummydata={dummydata}/>
       <Top top4data={top4data}/>
       <Footer footerState={'user'} />
