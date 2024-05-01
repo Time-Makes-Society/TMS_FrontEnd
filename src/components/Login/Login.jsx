@@ -11,14 +11,14 @@ const dummydata = [
   {
       "loginId": "lhj6364",
       "password": "1234",
-      "memberName": "임형준"
+      "memberName": "임형준",
   }
 ]
 function Login() {
-  const [enterValuse, setEnterValues] = useState({
+  const [enterValue, setEnterValues] = useState({
     loginId: '',
     password: '',
-    memberName:'',
+    memberName:'임형준',
   })
   const dispatch = useDispatch()
   const [showPassWord,setShowPassWord] = useState(false);
@@ -33,12 +33,23 @@ function Login() {
     }))
     
   }
-  const handleLogin=(event)=>{
-    // -- Api post 연결 code --
+  const handleLogin=async(event)=>{
     event.preventDefault();
-    localStorage.setItem('loginId',enterValuse.loginId)
-    localStorage.setItem('memberName',enterValuse.memberName)
-    dispatch(loginActions.login(enterValuse))
+    // -- Api post 연결 code --
+    // try{
+    //   await axios.post(`/api/login`,{
+    //     "loginId": enterValue.loginId,
+    //     "password": enterValue.password
+    //   })
+    // }
+    // catch(error){
+    //   new Error(error)
+    // }
+    
+    localStorage.setItem('loginId',enterValue.loginId)
+    localStorage.setItem('password',enterValue.password)
+    localStorage.setItem('memberName',enterValue.memberName)
+    dispatch(loginActions.login(enterValue))
     dispatch(authActions.login());
     navigate('/category');
   }

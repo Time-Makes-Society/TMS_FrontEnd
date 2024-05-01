@@ -22,50 +22,67 @@
         font-weight: 600;
     }
 }
-
+//프로필
 .profile-wrap {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 0 23px;
     margin-bottom: 36.64px;
+    
+    
     .profile-image {
         width: 54.06px;
-        height: 54.06px;
+        height: 45.06px;
         border-radius: 50%;
         background-color: #aaaaaa;
         margin-right: 14.94px;
     }
-
-    .profile-nickname-wrap {
+    
+    .profile-nickname-box-wrap{
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-       
-        .profile-name-wrap {
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        .profile-nickname-wrap {
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            h2 {
-                font-size: 18px;
-                font-weight: 600;
+            align-items: flex-start;
+            
+            .profile-name-wrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                h2 {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #000000;
+                    margin-right: 7.36px;
+                }
+                img {
+                    display: block;
+                    width: 18.69px;
+                    height: 18.69px;
+                }
+    
+            }
+            p{
+                font-size: 14px;
+                font-weight: 400;
                 color: #000000;
-                margin-right: 7.36px;
             }
-            img {
-                display: block;
-                width: 18.69px;
-                height: 18.69px;
-            }
-
         }
-        p{
-            font-size: 14px;
+        .logout{
+            padding: 10px;
+            color:#ffffff;
+            background-color: #333333;
+            font-size: 12px;
             font-weight: 400;
-            color: #000000;
+            border-radius: 10px;
         }
     }
+    
 }
 
 

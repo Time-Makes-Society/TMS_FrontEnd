@@ -1,6 +1,6 @@
 import React from 'react';
 import {createSlice} from '@reduxjs/toolkit';
-import { act } from 'react';
+
 
 const initialLoginState = {
     loginId:'',
@@ -17,6 +17,9 @@ const loginSlice = createSlice({
             state.password=password,
             state.memberName=memberName
 
+        },
+        getnickName(state,action){
+            state.memberName=action.payload
         },
         logout(state){
             state.loginId='',

@@ -63,6 +63,27 @@
     // - 댓글의 내용 부분 -
     .content-wrap{
         padding:34px 35.88px;
-        
+        .content{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .profile-wrap{
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                .profile{
+                    display: block;
+                    width: 27.95px;
+                    height: 27.95px;
+                    background-color: #d3d3d3;
+                    border-radius: 50%;
+                }
+            }
+            .option{
+                display: block;
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 }

@@ -3,35 +3,45 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { authActions } from '../../store/auth';
+import axios from 'axios';
 const dummydata=[
-    {id:1, name:'스포츠'},
-    {id:2, name:'IT/과학'},
-    {id:3, name:'정치'},
-    {id:4, name:'경제'},
-    {id:5, name:'사회'},
-    {id:6, name:'연예'},
-    {id:7, name:'문화'},
-    {id:8, name:'포토'},
-    {id:9, name:'해외'},
+    {id:1, name:'CULTURE'},
+    {id:2, name:'ECONOMY'},
+    {id:3, name:'ENTERTAIN'},
+    {id:4, name:'POLITICS'},
+    {id:5, name:'SCIENCE'},
+    {id:6, name:'SOCIETY'},
+    {id:7, name:'SPORTS'},
+    {id:8, name:'TECHNOLOG'},
+    {id:9, name:'WORLD'},
 ]
 function Category() {
     const [activeCategory,setActiveCategory] =useState([]);
     const navigate = useNavigate();
     const auth = useSelector(state => state.auth.isAuthenticated)
     const login = useSelector(state => state.login.loginId)
-    const handleCategory = (id) =>{
-        if(activeCategory.includes(id)){
-            setActiveCategory(activeCategory.filter(item => item !== id))
+    const handleCategory = (name) =>{
+        if(activeCategory.includes(name)){
+            setActiveCategory(activeCategory.filter(item => item !== name))
         }
         else{
-            setActiveCategory([...activeCategory, id])
+            setActiveCategory([...activeCategory, name])
         }
     }
     console.log("activeCategory :" , activeCategory)
     console.log('loginState: ',login)
-    const handleContinue = () => {
-        navigate("/timeset")
+    const handleContinue = async() => {
         // - 선택한 카테고리 API통신 추가 코드 작성 -
+        // try{
+        //     await axios.post(`/api/members/${memberId}/tag`,{
+        //         activeCategory
+        //     })
+        // }
+        // catch(error){
+        //     new Error(error)
+        // }
+        navigate("/timeset")
+        
     }
     console.log("auth상태",auth)
   return (
@@ -46,9 +56,9 @@ function Category() {
         <div className='category-content-wrap'>
             {dummydata.map((data)=>{
                 return (
-                    <div className={`category-content ${activeCategory.includes(data.id) ? 'active' : ''} `} 
+                    <div className={`category-content ${activeCategory.includes(data.name) ? 'active' : ''} `} 
                         key={data.id} 
-                        onClick={() => handleCategory(data.id)}>{data.name} </div>
+                        onClick={() => handleCategory(data.name)}>{data.name} </div>
                 )
             })}
             
