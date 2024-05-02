@@ -82,7 +82,7 @@
         .recommend-content-wrap{
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             width: 157px;
             height: 220px;
             background-color: #eaeaea;
@@ -91,6 +91,7 @@
             flex-shrink: 0;
             .recommend-content-image{
                 height: 100%;
+                max-height: 140px;
                 border-radius: 10px 10px 0 0;
             }
             .recommend-content-title-wrap{

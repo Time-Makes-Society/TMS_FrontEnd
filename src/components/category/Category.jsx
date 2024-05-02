@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -15,6 +15,9 @@ const dummydata=[
     {id:8, name:'TECHNOLOG'},
     {id:9, name:'WORLD'},
 ]
+const memberId = [
+    1 // 현재 로그인한 회원의 memberId가 1
+]
 function Category() {
     const [activeCategory,setActiveCategory] =useState([]);
     const navigate = useNavigate();
@@ -30,6 +33,19 @@ function Category() {
     }
     console.log("activeCategory :" , activeCategory)
     console.log('loginState: ',login)
+    useEffect(()=>{
+        const fetchUserMemberId =async() => {
+            try{
+                // const response = await axios.get('api/members/memberId');
+                // localStorage.setItem(response.data);
+                localStorage.setItem('memberId',memberId);
+            }
+            catch(error){
+                new Error(error);
+            }
+        }
+        fetchUserMemberId();
+    },[])
     const handleContinue = async() => {
         // - 선택한 카테고리 API통신 추가 코드 작성 -
         // try{
