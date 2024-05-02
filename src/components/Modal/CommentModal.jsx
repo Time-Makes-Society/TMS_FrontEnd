@@ -48,12 +48,15 @@ function CommentModal({ articleId }) {
       <div className='content-wrap'>
         {commentData.map((comment, index) => (
           <div className='content'>
-            <div className='profile-wrap'>
-              <span className='profile' />
-              <p className='nickname'>{comment.name}</p>
+            <span className='profile-image' />
+            <div className='comment-wrap'>
+              <p className='nickname'>
+                {comment.name}
+                <img src={option} className='option' />
+              </p>
               <p className='text'>{comment.content}</p>
             </div>
-            <img src={option} className='option' />
+           
           </div>
         ))}
       </div>

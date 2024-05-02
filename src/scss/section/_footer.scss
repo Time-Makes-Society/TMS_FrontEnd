@@ -32,7 +32,10 @@
 }
 @media (min-width:768px){
     .footer-wrap{
-        
+        margin: 0 auto;
+        width: 375px;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
 }

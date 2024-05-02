@@ -2,12 +2,15 @@ import React from 'react'
 
 import infoCircle from '../../assets/mypage/info-circle-line.svg';
 function Bar({userInfo,dummydata}) {
+  if(!userInfo){
+    return <div>loading...</div>
+  }
   return (
     <div className='statistics-bar-wrap'>
         <div className='statistics-header-wrap'>
           <div className='header-title'>
-            <p>{userInfo.name}님은</p>
-            <p> <span className='time'>{userInfo.time}분</span> 절약했어요!</p>
+            <p>{userInfo.memberName}님은</p>
+            <p> <span className='time'>{userInfo.totalReadTime}분</span> 절약했어요!</p>
           </div>
           <img src={infoCircle} alt='infoCircle-image' />
         </div>

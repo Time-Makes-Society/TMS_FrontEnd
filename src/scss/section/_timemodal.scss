@@ -42,3 +42,11 @@
         opacity: 1;
     }
 }
+@media (min-width:768px) {
+    .timemodal-wrap {
+        margin: 0 auto;
+        right: 50%;
+        transform: translateX(290%);
+    }
+
+}

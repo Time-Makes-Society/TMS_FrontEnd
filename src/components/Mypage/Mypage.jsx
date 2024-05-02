@@ -55,13 +55,17 @@ const top4data=[
   {id:3, category:'엔터', percentage:20},
   {id:4, category:'정치', percentage:5},
 ]
+const userInfoDummyData = [
+  {
+      "loginId": "test",
+      "password": "test!",
+      "memberName": "testUser",
+      "memberNickname": "testNickname",
+      "totalReadTime": "00:08:00"
+  }
+]
 function Mypage() {
-  const [userInfo, setUserInfo] = useState({
-    name: '임형준',
-    nickname: 'LHJ',
-    time: "538",
-    
-  })
+  const [userInfo, setUserInfo] = useState(null);
   const loginId = localStorage.getItem('loginId');
   const password = localStorage.getItem('password');
   const memberName = localStorage.getItem('memberName');
@@ -89,16 +93,17 @@ function Mypage() {
 
   useEffect(() => {
     // -- userInfo api 통신 코드 -- 
-    /*const fetchUserInfo = async() => {
+    const fetchUserInfo = async() => {
       try{
-        const response = await axios.get('유저api');
-        setUserInfo(response.data);
+        //const response = await axios.get('/api/members/get/{memberId}');
+        //setUserInfo(response.data);
+        setUserInfo(userInfoDummyData[0])
       }
       catch(error){
         new Error(error);
       }
     }
-    fetchUserInfo();*/
+    fetchUserInfo();
   }, [])
   return (
     <>

@@ -3,7 +3,9 @@ import React from 'react';
 import modified from '../../assets/mypage/modified.svg';
 
 function Profile({ userInfo,handleLogout }) {
-  
+  if(!userInfo){
+    return <div>Loading...</div>
+  }
   return (
     <div className='profile-wrap'>
      
@@ -12,10 +14,10 @@ function Profile({ userInfo,handleLogout }) {
       <div className='profile-nickname-box-wrap'>
         <div className='profile-nickname-wrap'>
           <div className='profile-name-wrap'>
-            <h2>{userInfo.name}</h2>
+            <h2>{userInfo.memberName}</h2>
             <img src={modified} alt='modified-image' />
           </div>
-          <p>{userInfo.nickname}</p>
+          <p>{userInfo.memberNickname}</p>
         </div>
 
         <button className='logout' onClick={handleLogout}>로그아웃</button>
