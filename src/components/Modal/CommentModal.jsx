@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 import option from '../../assets/option.svg'
+import profileimage from '../../assets/playing-guitar.png';
 const dummydata = [
   { id: 1, name: '집수리오형제', content: '달려드는 독보적의 바닥이듯 세습에 폭락하나' },
   { id: 2, name: '독수리오년째', content: '달려드는 독보적의 지극히 바닥이듯 세습에 폭락' },
@@ -47,8 +48,8 @@ function CommentModal({ articleId }) {
       <span className='line' />
       <div className='content-wrap'>
         {commentData.map((comment, index) => (
-          <div className='content'>
-            <span className='profile-image' />
+          <div className='content' key={index}>
+            <div className='profile-image' style={{backgroundImage:`url(${profileimage})`}}/>
             <div className='comment-wrap'>
               <p className='nickname'>
                 {comment.name}
