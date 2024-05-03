@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-//import axios from 'axios';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 import backward from '../../../assets/backward.svg';
@@ -38,8 +38,11 @@ function FeedDetail({ feedType }) {
   const [feedState, setFeedState] = useState(false);
   const [contentSize, setContentSize] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
   console.log("feedDetail:", id)
-  
+  const handleGoBack=()=>{
+    navigate(-1);
+  }
   const handleFeedState = () => {
     setFeedState(!feedState);
   }
@@ -81,7 +84,7 @@ function FeedDetail({ feedType }) {
   //뒤로가기 이미지는 사용자 기록에 따라 뒤로가기 되게끔 해야함.
   return (
     <>
-      <FeedHeader/>
+      <FeedHeader handleGoBack={handleGoBack}/>
       <FeedContent feedState={feedState} feedContent={feedContent} contentSize={contentSize}/>
       <FeedFooter handleContentSizeUpDown={handleContentSizeUpDown} handleFeedState={handleFeedState} feedState={feedState}/>
     </>
