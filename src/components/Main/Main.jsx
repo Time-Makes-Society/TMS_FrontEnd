@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
 
 import Tms from '../../assets/main/T_M_S.svg';
 import Footer from '../common/Footer';
 import TimeModal from '../Modal/TimeModal';
+import { timerActions } from '../../store/count';
 const dummydata2 = [
   {
     "content": [
@@ -87,6 +89,10 @@ const dummydata = [
 function Main() {
   const [liveArticle, setLiveArticle] = useState([]);
   const [recommendArticle, setRecommendArticle] = useState([]);
+  const dispatch = useDispatch();
+  const timer = localStorage.getItem('timer');
+  
+  
   useEffect(() => {
     // - api통신코드 -
     // const fetchLiveArticle = async() =>{
@@ -99,7 +105,7 @@ function Main() {
     //   }
     // }
     // fetchLiveArticle();
-
+    dispatch(timerActions.timer(timer))
 
     setLiveArticle(dummydata2)
     setRecommendArticle(dummydata2)
@@ -142,7 +148,7 @@ function Main() {
 
         ))}
       </div>
-      <TimeModal time={'5:00'} />
+      <TimeModal time={timer} />
       <Footer footerState={'home'} />
     </div>
   )
