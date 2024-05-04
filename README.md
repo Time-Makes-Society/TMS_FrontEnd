@@ -6,3 +6,7 @@
 1. sass
 2. redux 툴킷
 3. react-router-dom
+
+# 최적화
+
+1. lazy를 이용한 최적화 진행
