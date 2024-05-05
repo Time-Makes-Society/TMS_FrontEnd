@@ -78,20 +78,13 @@ const dummydata2 = [
     "empty": false
   }
 ]
-const dummydata = [
-  { id: 1, title: "달려드는 독보적의 지극히 바닥이듯 세습에 폭락하냐", newsCategory: "IT", imageUrl: 'https://post-phinf.pstatic.net/MjAyNDA0MTVfMjk4/MDAxNzEzMTM2MTE1MTk3.SAs0PYBs-nvaVMHe4IakLMR22apTqTprEQvr5k9tfrYg.eZ5IiKAyIBwaJahTMPm87INyDuTvKJx5fe1_x3BJEY4g.JPEG/05.jpg?type=w1200' },
-  { id: 2, title: "김승찬", newsCategory: "스포츠", imageUrl: 'https://post-phinf.pstatic.net/MjAyNDA0MTVfMjk4/MDAxNzEzMTM2MTE1MTk3.SAs0PYBs-nvaVMHe4IakLMR22apTqTprEQvr5k9tfrYg.eZ5IiKAyIBwaJahTMPm87INyDuTvKJx5fe1_x3BJEY4g.JPEG/05.jpg?type=w1200' },
-  { id: 3, title: "박혜정", newsCategory: "해외", imageUrl: 'https://post-phinf.pstatic.net/MjAyNDA0MTVfMjk4/MDAxNzEzMTM2MTE1MTk3.SAs0PYBs-nvaVMHe4IakLMR22apTqTprEQvr5k9tfrYg.eZ5IiKAyIBwaJahTMPm87INyDuTvKJx5fe1_x3BJEY4g.JPEG/05.jpg?type=w1200' },
-  { id: 4, title: "상명대학교", newsCategory: "경제", imageUrl: 'https://post-phinf.pstatic.net/MjAyNDA0MTVfMjk4/MDAxNzEzMTM2MTE1MTk3.SAs0PYBs-nvaVMHe4IakLMR22apTqTprEQvr5k9tfrYg.eZ5IiKAyIBwaJahTMPm87INyDuTvKJx5fe1_x3BJEY4g.JPEG/05.jpg?type=w1200' },
-  { id: 5, title: "소프트웨어학과", newsCategory: "과학", imageUrl: 'https://post-phinf.pstatic.net/MjAyNDA0MTVfMjk4/MDAxNzEzMTM2MTE1MTk3.SAs0PYBs-nvaVMHe4IakLMR22apTqTprEQvr5k9tfrYg.eZ5IiKAyIBwaJahTMPm87INyDuTvKJx5fe1_x3BJEY4g.JPEG/05.jpg?type=w1200' },
-]
+
 
 function Main() {
   const [liveArticle, setLiveArticle] = useState([]);
   const [recommendArticle, setRecommendArticle] = useState([]);
   const dispatch = useDispatch();
   const timer = localStorage.getItem('timer');
-  
   
   useEffect(() => {
     // - api통신코드 -
@@ -148,7 +141,7 @@ function Main() {
 
         ))}
       </div>
-      <TimeModal time={timer} />
+      <TimeModal/>
       <Footer footerState={'home'} />
     </div>
   )
