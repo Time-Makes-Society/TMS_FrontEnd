@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import {timerActions} from '../../store/count';
 function TimeSet() {
     const [Time, setTime] = useState();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleTime = () => {
+        dispatch(timerActions.timer(Time))
+        dispatch(timerActions.modified())
+        localStorage.setItem('timer',Time)
         //-- API 통신 추가 --
         navigate('/home')
     }

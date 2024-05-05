@@ -12,6 +12,7 @@ import backward from '../../assets/backward.svg';
 import infoCircle from '../../assets/mypage/info-circle-line.svg';
 import Bar from './Bar';
 import Top from './Top';
+import TimeModal from '../Modal/TimeModal';
 const dummydata = [
   {
     date:"mon",
@@ -115,6 +116,7 @@ function Mypage() {
       <Profile userInfo={userInfo} handleLogout={handleLogout}/>
       <Bar userInfo={userInfo} dummydata={dummydata}/>
       <Top top4data={top4data}/>
+      <TimeModal/>
       <Footer footerState={'user'} />
     </>
   )

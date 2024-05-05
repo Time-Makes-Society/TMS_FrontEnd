@@ -5,6 +5,7 @@ import Footer from '../common/Footer'
 import Scrab from '../../assets/feed/scrab.svg';
 import Option from '../../assets/feed/option.svg';
 import FeedContent from './FeedContent';
+import TimeModal from '../Modal/TimeModal';
 
 const livedummydata = [
   {
@@ -162,7 +163,7 @@ function Feed() {
         ))}
       </div>
 
-
+      <TimeModal/>
       <Footer footerState={'feed'} />
     </div>
   )

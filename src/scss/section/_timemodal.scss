@@ -9,6 +9,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
+    z-index: 3;
     .timemodal-bar{
         width: 60px;
         height: 60px;
@@ -17,7 +18,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        animation: time-bar 5000ms;
+        //animation: time-bar 5000ms;
     }
     .timemodal-time{
         display: flex;
