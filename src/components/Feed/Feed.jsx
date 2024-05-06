@@ -122,12 +122,14 @@ const scrabdummydata = [
   }
 ]
 function Feed() {
-  const [feedState, setFeedState] = useState('실시간');
-  const [feedList, setFeedList] = useState([]);
-  const [scrabList,setScrabList] = useState([]);
+  const [feedState, setFeedState] = useState('실시간'); //피드의 카테고리
+  const [feedList, setFeedList] = useState([]);// 피드 데이터 받아옴
+  const [scrabList,setScrabList] = useState([]);// 스크랩 데이터 받아옴
+  const [bookmarkStates,setBookmarkStates] = useState([]); // 즐겨찾기 상태 true인지 false인지
+  const memberId = localStorage.getItem('memberId')
   const navigate = useNavigate();
   const handleFeedState = (state) => {
-    setFeedState(state);
+      setFeedState(state);
   }
   const handleFeed = (id) => {
     navigate(`/feed_detail/${id}`);
@@ -145,18 +147,125 @@ function Feed() {
 
     // }
     // fetchFeed();
+
     setScrabList(scrabdummydata);
     if (feedState === '실시간') {
       setFeedList(livedummydata);
+      const newBookmarkStates = {};
+      livedummydata[0].content.forEach((article)=>{
+        const id = article.id;
+        const category = article.category;
+        newBookmarkStates[article.id] ={
+          id:id,
+          category:category,
+          state: scrabdummydata.some((scrab)=>scrab.uuidArticleId===article.id && scrab.category===article.category),
+        }
+      })
+      setBookmarkStates(newBookmarkStates);
     }
     else if (feedState === '추천') {
       setFeedList(livedummydata);
     }
     else {
       setFeedList(scrabdummydata);
+      const newBookmarkStates = {};
+      scrabdummydata.forEach((article)=>{
+        newBookmarkStates[article.uuidArticleId] ={
+          id:article.uuidArticleId,
+          category:article.category,
+          state:true,
+        }
+      })
+      setBookmarkStates(newBookmarkStates)
     }
 
   }, [feedState])
+
+  
+  const handleBookmark=(id)=>{
+    // 메인페이지에서 scrap get api불러옴 -> 리스트 비교
+    // const postBookmark= async() =>{
+    //     try{
+    //         const response = await axios.post('/api/scrap',{
+    //             "memberId": memberId,
+    //             "articleId": id
+    //         })
+    //     }
+    //     catch(error){
+    //         new Error(error);
+    //     }
+    // }
+
+    //즐겨찾기 삭제하는 부분
+    if(feedState==='스크랩'){
+        const deleteBookmark=async() => {
+            try{
+                // const response = await axios.delete('/api/scrap/cancel',{
+                //     "memberId": memberId,
+                //     "articleId": id,
+                // })
+                // console.log(response.data)
+                setFeedList((prev)=>(prev.filter((item)=> item.uuidArticleId!==id)));
+            }
+            catch(error){
+                new Error(error);
+            }
+        }
+        deleteBookmark()
+    }
+    else{
+      //즐겨찾기되어있는 경우
+        if(bookmarkStates[id].state){
+          const deleteBookmark=async() => {
+            try{
+                // const response = await axios.delete('/api/scrap/cancel',{
+                //     "memberId": memberId,
+                //     "articleId": id,
+                // })
+                // console.log(response.data)
+                setBookmarkStates((prev)=>{
+                  const newBookmarkStates={...prev};
+                  newBookmarkStates[id]={
+                    id:id,
+                    state: !prev[id]?.state || false,
+                  }
+                  return newBookmarkStates;
+                })
+            }
+            catch(error){
+                new Error(error);
+            }
+        }
+        deleteBookmark()
+        }
+        //즐겨찾기되어있지 않은 경우
+        else{
+          setBookmarkStates((prev)=>{
+            const newBookmarkStates={...prev};
+            newBookmarkStates[id]={
+              id:id,
+              state: !prev[id]?.state || true,
+            }
+            return newBookmarkStates;
+          })
+          const postBookmark = async() => {
+            try{
+              // const response = await axios.post(`/api/scrap`,{
+              //   "memberId": memberId,
+              //   "articleId": id,
+              // });
+              
+            }
+            catch(error){
+              new Error(error);
+            }
+          }
+          postBookmark();
+        }
+    }
+}
+
+
   const fs = feedState === '실시간' || feedState === '추천' ? (feedList.length > 0 ? feedList[0].content : []) : feedList
   return (
     <div className='feed-wrap'>
@@ -169,9 +278,9 @@ function Feed() {
       <div className='feed-content-wrap'>
         {Array.isArray(fs) && fs.map((feed, index) => (
           feedState ==='실시간'||feedState==='추천' ? 
-          <FeedContent key={index} feedState={feedState} feed={feed} onClick={() => handleFeed(feed.id)}/>
+          <FeedContent key={index} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)}/>
           :
-          <FeedContent key={index} setFeedList={setFeedList} feed={feed} feedState={feedState} onClick={() => handleFeed(feed.uuidArticleId)}/> 
+          <FeedContent key={index} setFeedList={setFeedList} feed={feed} feedState={feedState} handleBookmark={handleBookmark} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} onClick={() => handleFeed(feed.uuidArticleId)}/> 
         ))}
       </div>
 
