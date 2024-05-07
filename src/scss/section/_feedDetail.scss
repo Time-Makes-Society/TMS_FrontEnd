@@ -1,4 +1,8 @@
 // - header css -
+.bg-dark{
+    background-color: rgba(0, 0, 0, 0.7);
+   
+}
 .feedDetail-header-wrap {
     width: 100%;
     height: 51px;
@@ -6,8 +10,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    position: relative;
-
+    position: fixed;
+    background-color: #ffffff;
     .backward {
         display: block;
         width: 24px;
@@ -30,6 +34,9 @@
         height: 2px;
         background-color: #cacaca;
     }
+    &.active{
+        background-color: rgba(86, 85, 85, 0.7);
+    }
 }
 
 .feedDetail-content-wrap {
@@ -37,7 +44,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 40.6px 33.93px 0 33.93px;
+    padding: 70.6px 33.93px 0 33.93px;
 
     .feedDetail-content-header {
         font-size: 20px;

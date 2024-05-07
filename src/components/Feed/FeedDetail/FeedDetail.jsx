@@ -49,11 +49,17 @@ function FeedDetail({ feedType }) {
   const handleFeedState = () => {
     setFeedState(!feedState);
   }
-  const handleComment = () => {
-    setCommentState(!commentState);
+  const handleComment = (state) => {
+    setCommentState(state);
   }
   const handleContentSizeUpDown = () => {
     setContentSize(!contentSize);
+  }
+  if(commentState){
+    document.body.style.overflow = 'hidden';
+  }
+  else{
+    document.body.style.overflow = 'auto';
   }
   useEffect(() => {
     if(feedState){
@@ -89,13 +95,13 @@ function FeedDetail({ feedType }) {
   
   //뒤로가기 이미지는 사용자 기록에 따라 뒤로가기 되게끔 해야함.
   return (
-    <>
-      <FeedHeader handleGoBack={handleGoBack}/>
-      <FeedContent feedState={feedState} feedContent={feedContent} contentSize={contentSize} commentState={commentState} handleComment={handleComment} />
+    <div className={`${commentState?'bg-dark':''} `} >
+      <FeedHeader handleGoBack={handleGoBack} commentState={commentState}/>
+      <FeedContent feedState={feedState} feedContent={feedContent} contentSize={contentSize} commentState={commentState} handleComment={() =>handleComment(true)} />
       <TimeModal/>
-      {commentState? <CommentModal/> : ''}
+      {commentState? <CommentModal handleComment={() =>handleComment(false)}/> : ''}
       <FeedFooter handleContentSizeUpDown={handleContentSizeUpDown} handleFeedState={handleFeedState} feedState={feedState}/>
-    </>
+    </div>
 
   )
 }
