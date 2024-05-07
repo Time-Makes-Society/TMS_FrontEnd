@@ -1,8 +1,9 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-import option from '../../assets/option.svg'
+import option from '../../assets/option.svg';
 import profileimage from '../../assets/playing-guitar.png';
+import like from '../../assets/feedDetail/like.svg';
 const dummydata = [
   { id: 1, name: '집수리오형제', content: '달려드는 독보적의 바닥이듯 세습에 폭락하나' },
   { id: 2, name: '독수리오년째', content: '달려드는 독보적의 지극히 바닥이듯 세습에 폭락' },
@@ -60,6 +61,12 @@ function CommentModal({ articleId }) {
            
           </div>
         ))}
+
+        <div className='comment-footer'>
+          <span className='profile' style={{backgroundImage:`url(${profileimage})`}}/>
+          <input className='input' placeholder='댓글추가...'/>
+          <img src={like} className='like' alt='like-image'/>
+        </div>
       </div>
     </div>
   )
