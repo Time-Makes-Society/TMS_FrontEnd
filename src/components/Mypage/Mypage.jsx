@@ -51,11 +51,12 @@ const dummydata = [
   },
 ];
 const top4data=[
-  {id:1, category:'It', percentage:45},
-  {id:2, category:'경제', percentage:30},
-  {id:3, category:'엔터', percentage:20},
-  {id:4, category:'정치', percentage:5},
+  {id:1, category:'It', percentage:35},
+  {id:2, category:'sports', percentage:40},
+  {id:3, category:'technology', percentage:20},
+  {id:4, category:'science', percentage:5},
 ]
+
 const userInfoDummyData = [
   {
       "loginId": "test",
@@ -69,6 +70,7 @@ function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
   const loginId = localStorage.getItem('loginId');
   const password = localStorage.getItem('password');
+  const memberId = localStorage.getItem('memberId');
   const memberName = localStorage.getItem('memberName');
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -98,6 +100,7 @@ function Mypage() {
       try{
         //const response = await axios.get('/api/members/get/{memberId}');
         //setUserInfo(response.data);
+        //const response2 = await axios.get('/api/members/readTimeRank/{memberId});
         setUserInfo(userInfoDummyData[0])
       }
       catch(error){
