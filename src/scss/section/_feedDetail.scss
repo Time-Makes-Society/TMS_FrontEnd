@@ -126,3 +126,13 @@
         }
     }
 }
+@media(min-width: 768px){
+    .feedDetail-header-wrap {
+        margin: 0 auto;
+        width: 375px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    
+}

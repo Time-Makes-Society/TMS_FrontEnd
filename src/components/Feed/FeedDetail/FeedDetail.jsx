@@ -40,10 +40,33 @@ function FeedDetail({ feedType }) {
   const [feedState, setFeedState] = useState(false);
   const [contentSize, setContentSize] = useState(false);
   const [commentState,setCommentState] = useState(false);
+  const [backWardState,setBackWardState] = useState(false);
+  const [readTime,setReadTime] = useState(0);
+  const [formatReadTime,setFormatReadTime] = useState('');
   const { id } = useParams();
+  const memberId = localStorage.getItem('memberId');
   const navigate = useNavigate();
   console.log("feedDetail:", id)
-  const handleGoBack=()=>{
+  const handleGoBack=async()=>{
+    setBackWardState(true)
+    try{
+      const response = await axios.post('/api/members/readTime',{
+        "memberId": memberId,
+        "readTime": formatReadTime
+      })
+      const response2 = await axios.post('/api/members/categoryReadTime',{
+        "member": {
+            "id": memberId
+        },
+        "category": feedContent.category,
+        "readTime": formatReadTime
+    })
+    await console.log('읽은시간 post상태:',response.data)
+    await console.log('읽은시간누적 post상태:',response2.data)
+    }
+    catch(error){
+      new Error(error);
+    }
     navigate(-1);
   }
   const handleFeedState = () => {
@@ -55,6 +78,7 @@ function FeedDetail({ feedType }) {
   const handleContentSizeUpDown = () => {
     setContentSize(!contentSize);
   }
+  //바탕화면 스크롤 억제 기능
   if(commentState){
     document.body.style.overflow = 'hidden';
   }
@@ -66,7 +90,7 @@ function FeedDetail({ feedType }) {
       // --임시 API 통신 code--
        // const fetchFeedDetail = async() => {
     //   try{
-    //     const response = await axios.get('요약api');
+    //     const response = await axios.get('/api/summarize/:uuid');
     //     setFeedContent(response.data)
     //   }
     //   catch(error){
@@ -80,7 +104,7 @@ function FeedDetail({ feedType }) {
       // --임시 API 통신 code--
        // const fetchFeedDetail = async() => {
     //   try{
-    //     const response = await axios.get('원문api');
+    //     const response = await axios.get('/api/articles/:uuid');
     //     setFeedContent(response.data)
     //   }
     //   catch(error){
@@ -92,8 +116,24 @@ function FeedDetail({ feedType }) {
     }
     
   }, [feedState])
+  useEffect(()=>{
+    const time = setInterval(() => {
+      setReadTime((prevTime)=>prevTime+1)
+    }, 1000);
+    
+    if(backWardState){
+      clearInterval(time)
+    }
+    return ()=> clearInterval(time)
+  },[backWardState])
+  useEffect(()=>{
+    const minute = Math.floor(readTime/60);
+    const second = (readTime%60);
+    const format = `00:${minute<10 ?`0${minute}` : minute}:${second <10 ? `0${second}` : second}`;
+    setFormatReadTime(format);
+  },[readTime])
   
-  //뒤로가기 이미지는 사용자 기록에 따라 뒤로가기 되게끔 해야함.
+  console.log("readTime:",formatReadTime)
   return (
     <div className={`${commentState?'bg-dark':''} `} >
       <FeedHeader handleGoBack={handleGoBack} commentState={commentState}/>

@@ -5,8 +5,9 @@
     position: fixed;
     left: 0;
     bottom: -100px;
+    transform: translateX(-50%);
     background-color: #ffffff;
-    max-height: 80vh;
+    //max-height: 80vh;
     //임시 보여지게하기 위한 border
     border: 1px solid black;
     z-index: 7;
@@ -73,7 +74,7 @@
     .content-wrap{
         padding:34px 23.11px;
         overflow-y: auto;
-        max-height: 80vh;
+        max-height: 60vh;
         -ms-overflow-style:none; /* IE and Edge */
         scrollbar-width:none;
         .content{
@@ -165,6 +166,10 @@
         width: 375px;
         left: 50%;
         transform: translateX(-50%);
+    }
+    .commentModal-wrap{
+        
+        
     }
     
     
