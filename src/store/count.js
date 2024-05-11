@@ -13,6 +13,7 @@ const timerSlice = createSlice({
     reducers:{
         timer(state,action){
             state.timer = action.payload
+            
         },
         tick(state){
             if(state.running && state.modifiedTimer>0){
