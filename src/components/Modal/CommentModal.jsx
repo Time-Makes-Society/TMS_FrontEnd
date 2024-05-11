@@ -184,7 +184,8 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
       <form className='comment-footer' onSubmit={handleSubmit}>
         <span className='profile' style={{ backgroundImage: `url(${profileimage})` }} />
         <input className='input' placeholder='댓글추가...' name='comment' id='comment' value={newComment} onChange={(event) => setNewComment(event.target.value)} />
-        <img src={like} className='like' alt='like-image' />
+        <button type='submit' className='submitButton'>입력</button>
+        {/* <img src={like} className='like' alt='like-image' /> */}
       </form>
 
     </>

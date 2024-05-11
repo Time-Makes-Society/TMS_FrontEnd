@@ -38,7 +38,7 @@
     .content-wrap {
         display: flex;
         justify-content: flex-start;
-        align-items: center;
+        align-content: center;
 
         .profile {
             display: block;
@@ -57,6 +57,18 @@
             font-size: 11px;
             font-weight: 400;
             color: #A5A5A5;
+            margin-right: 20px;
+        }
+        .submitButton{
+            display: block;
+            width: 50px;
+            height: 29.33px;
+            padding: 9.17px 11.33px;
+            background-color: #F2F2F2;
+            font-size: 11px;
+            font-weight: 400;
+            color: #A5A5A5;
+            border-radius: 4px;
         }
     }
 

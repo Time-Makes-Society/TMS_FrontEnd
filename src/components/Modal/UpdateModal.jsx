@@ -15,6 +15,7 @@ function UpdateModal(
             <form className='content-wrap' onSubmit={handleSubmit}>
               <span className='profile' style={{backgroundImage:`url(${profileimage})`}}/>
               <input className='update-modal-input' placeholder='수정할 내용 입력...' onChange={(event) => setNewComment(event.target.value)} />
+              <button className='submitButton' type='submit'>입력</button>
             </form>
             : <>
               <button onClick={handleUpdateInput}>수정하기</button>
