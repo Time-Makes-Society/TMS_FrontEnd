@@ -13,7 +13,7 @@ const Feed = lazy(() => import('./components/Feed/Feed'));
 const Mypage = lazy(() => import('./components/Mypage/Mypage'));
 const FeedDetail = lazy(()=>import('./components/Feed/FeedDetail/FeedDetail'));
 const CommentModal = lazy(()=>import('./components/Modal/CommentModal'));
-
+const UpdateModal = lazy(()=>import('./components/Modal/UpdateModal'));
 function App() {
   return (
     <BrowserRouter>
@@ -28,7 +28,7 @@ function App() {
           <Route path='/feed' element={<Feed />} />
           <Route path='/mypage' element={<Mypage />} />
           <Route path='/feed_detail/:id' element={<FeedDetail />} />
-          <Route path='/modal' element={<CommentModal />} />
+          <Route path='/modal' element={<UpdateModal/>} />
         </Routes>
       </Suspense>
     </BrowserRouter>

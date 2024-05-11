@@ -1,8 +1,5 @@
 // - header css -
-.bg-dark{
-    background-color: rgba(0, 0, 0, 0.7);
-   
-}
+
 .feedDetail-header-wrap {
     width: 100%;
     height: 51px;
@@ -34,9 +31,7 @@
         height: 2px;
         background-color: #cacaca;
     }
-    &.active{
-        background-color: rgba(86, 85, 85, 0.7);
-    }
+   
 }
 
 .feedDetail-content-wrap {

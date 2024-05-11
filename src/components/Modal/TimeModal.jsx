@@ -39,7 +39,7 @@ function TimeModal() {
       timeFormat();
     } , [timer])
     
-    console.log("timer: ", timer)
+    //console.log("timer: ", timer)
   return (
     <div className='timemodal-wrap' onClick={handleModal}>
         <span className='timemodal-bar'>
