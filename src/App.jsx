@@ -12,12 +12,13 @@ const Main = lazy(() => import('./components/Main/Main'));
 const Feed = lazy(() => import('./components/Feed/Feed'));
 const Mypage = lazy(() => import('./components/Mypage/Mypage'));
 const FeedDetail = lazy(()=>import('./components/Feed/FeedDetail/FeedDetail'));
-const CommentModal = lazy(()=>import('./components/Modal/CommentModal'));
 const UpdateModal = lazy(()=>import('./components/Modal/UpdateModal'));
+const TimeOut = lazy(()=>import('./components/timeOut/TimeOut'));
+import Loading from './components/loading/Loading';
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading loading={true}/>}>
         <Routes>
           <Route path='/' element={<Start />} />
           <Route path='/login' element={<Login />} />
@@ -29,6 +30,8 @@ function App() {
           <Route path='/mypage' element={<Mypage />} />
           <Route path='/feed_detail/:id' element={<FeedDetail />} />
           <Route path='/modal' element={<UpdateModal/>} />
+          <Route path='/timeout' element={<TimeOut/>}/>
+          <Route path='/loading' element={<Loading loading={true}/>}/>
         </Routes>
       </Suspense>
     </BrowserRouter>

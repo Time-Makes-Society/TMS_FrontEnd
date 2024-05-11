@@ -1,5 +1,5 @@
 import React from 'react'
-
+import profileimage from '../../assets/playing-guitar.png';
 function UpdateModal(
   { isMyComment, setNewComment, newComment, setUpdateButton, updateButton, handleUpdateInput, handleUpdate, handleDelete, currentCommentId, goToUpdate, setGotoUpdate, articleId }) {
     const handleSubmit = (event)=>{
@@ -12,7 +12,8 @@ function UpdateModal(
       <div className='update-modal-wrap' key={currentCommentId}>
         {isMyComment ?
           <>{updateButton ?
-            <form onSubmit={handleSubmit}>
+            <form className='content-wrap' onSubmit={handleSubmit}>
+              <span className='profile' style={{backgroundImage:`url(${profileimage})`}}/>
               <input className='update-modal-input' placeholder='수정할 내용 입력...' onChange={(event) => setNewComment(event.target.value)} />
             </form>
             : <>

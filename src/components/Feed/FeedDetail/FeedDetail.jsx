@@ -51,6 +51,7 @@ function FeedDetail({ feedType }) {
   const handleGoBack=async()=>{
     setBackWardState(true)
     try{
+      /*
       const response = await axios.post('/api/members/readTime',{
         "memberId": memberId,
         "readTime": formatReadTime
@@ -61,7 +62,7 @@ function FeedDetail({ feedType }) {
         },
         "category": feedContent.category,
         "readTime": formatReadTime
-    })
+    })*/
     await console.log('읽은시간 post상태:',response.data)
     await console.log('읽은시간누적 post상태:',response2.data)
     }

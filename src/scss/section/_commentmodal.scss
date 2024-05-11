@@ -20,7 +20,7 @@
     //임시 보여지게하기 위한 border
     border: 1px solid black;
     z-index: 7;
-    animation: slide-up-fade-in 0.1s ease-in-out forwards;
+    //animation: slide-up-fade-in 0.1s ease-in-out forwards;
     // - 댓글의 header 부분 -
     .header-wrap{
         padding: 15.3px 27px 9.44px 27px;
@@ -192,18 +192,13 @@
     }
 }
 @media(min-width: 768px){
-    .comment-footer {
+    .comment-footer,.commentModal-wrap {
         margin: 0 auto;
         width: 375px;
         left: 50%;
         transform: translateX(-50%);
-    }
-    .commentModal-wrap{
-        
         
     }
-    
-    
 }
 @keyframes slide-up-fade-in {
     0%{
