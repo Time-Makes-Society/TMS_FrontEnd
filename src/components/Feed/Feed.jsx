@@ -7,73 +7,6 @@ import Option from '../../assets/feed/option.svg';
 import FeedContent from './FeedContent';
 import TimeModal from '../Modal/TimeModal';
 
-const livedummydata = {
-  "pageInfo": {
-      "pageNumber": 0, // 현재 페이지
-      "pageMaxSize": 5, // 최대 호출 기사 갯수
-      "pageCurrentSize": 5, // 현재 호출된 기사
-      "totalPageNumber": 2, // 모든 페이지 갯수 2개 이므로 page=0부터 page=1까지
-      "totalSize": 17 // 모든 기사 갯수
-  },
-  "articles": [
-      {
-          "id": "0031b0a2-6c39-4355-bb5e-e3b751a0015a",
-          "title": "'알콩달콩' 강예슬, 전원주와 찰떡 케미..관절 건강 직접 확인",
-          "category": "연예",
-          "image": "https://thumb.mtstarnews.com/21/2024/05/2024050922212680601_1.jpg",
-          "publisher": "starnewskorea",
-          "articleTime": "00:01:32",
-          "createdDate": "2024-05-09T22:28:00"
-      },
-      {
-          "id": "18e2bb0f-e579-4300-8859-5268a3528018",
-          "title": "[연예가브리핑] 원빈↑…승리·기안84↓",
-          "category": "연예",
-          "image": "https://menu.moneys.co.kr/moneyweek/thumb/2024/05/09/06/2024050914524524554_1.jpg",
-          "publisher": "moneys",
-          "articleTime": "00:02:50",
-          "createdDate": "2024-05-09T19:02:00"
-      },
-      {
-          "id": "365e5b7d-aeda-4e9c-abcf-7c8e7ac352fa",
-          "title": "[합천군 소식] 상수도 안전대책 추진-여성민방위대 양산리 수해복구 봉사",
-          "category": "문화",
-          "image": "https://www.kpinews.kr/data/upi/image/2024/05/09/p1065595903195352_376_thum.JPG",
-          "publisher": "kpinews",
-          "articleTime": "00:01:49",
-          "createdDate": "2024-05-10T00:20:00"
-      },
-      {
-          "id": "3bb0d5dd-c5d3-4d48-92da-ac23e7e50194",
-          "title": "KBS 뉴스",
-          "category": "문화",
-          "image": "http://news.kbs.co.kr/data/news/title_image/newsmp4/gangneung/news9/2024/05/09/20_7960206.jpg",
-          "publisher": "news",
-          "articleTime": "00:02:01",
-          "createdDate": "2024-05-09T23:46:00"
-      },
-      {
-          "id": "3c54b7e0-9ba6-4e18-9520-31dcc873dc71",
-          "title": "[잇슈 연예 브리핑] \"난 이제 품절녀\"…한예슬, 10살 연하 남친과 혼인신고",
-          "category": "연예",
-          "image": "https://cdn.obsnews.co.kr/news/thumbnail/202405/1440840_641515_315_v150.jpg",
-          "publisher": "obsnews",
-          "articleTime": "00:01:56",
-          "createdDate": "2024-05-09T10:06:00"
-      },
-      {
-        "id": "497da812-94fa-423a-ba70-cc465b0e8a6d",
-        "title": "존 리 “NASA 경험 적용…우주항공청 ‘원팀’ 구성할 것”",
-        "category": "문화",
-        "content": "존 리 초대 우주항공청 임무본부장 내정자가 미국 항공우주국, 나사(NASA)에서 일한 경험을 한국의 우주항공청에 적용하겠다고 밝혔습니다.\n\n\n\n나사 출신으로 우주청의 연구개발(R&D)을 총괄하게 된 존 리 임무본부장 내정자는 오늘(2일) 서울 광화문에서 과학기술정보통신부 출입기자단과 가진 간담회을 갖고, “협력적 조직문화를 만들어 ‘원팀’을 구성하겠다”며, “직원들이 우주청 전체의 목표를 지향하는 큰 그림을 보길 바란다”고 강조했습니다.\n\n\n\n리 내정자는 “NASA에서 30년간 일하며 본 것을 한국에 어떻게 적용할지 고민하고 있다”고 말했습니다. 또, “은퇴 이후 지난해 한국의 기술과 전문가를 살펴보며, 충분히 할 수 있다는 느낌이 있었다”며 한국의 잠재력을 보고 본부장 역할을 맡았다고 설명했습니다.\n\n\n\n윤영빈 초대 우주청장 내정자는 우주청의 역할과 관련해 “우주 사업의 주요 역할을 맡기는 기업을 키워 내려 한다”고 말했습니다.\n\n\n\n윤 내정자는 “지금까지 기업은 우주 분야에서 주도적 역할이라기보다 사업을 통해 용역을 받는 부분적 역할이었다”며, “기업을 키워내야 세계적인 우주산업을 육성할 수 있다”고 강조했습니다.\n\n\n\n이어, “발사체에선 재사용 발사체를 쏘는 선도기업이 나오며 전 세계 패러다임이 바뀌고, 위성은 소형 위성을 여러 대 쏘아 중대형 위성 성능을 발휘한다”며 “트렌드가 바뀌고 있는데 우리는 그런 트렌드를 쫓아가지 못하는 상황”이라고 설명했습니다.\n\n\n\n또, “얼마나 빨리 쫓아가느냐가 경쟁력”이라며 “그런 마인드를 가진 민간기업이 있다면, 그 기업이 우주항공청의 관심을 받을 기업”이라고 강조했습니다.\n\n\n\n내정자들은 우주청이 펼칠 임무와 구상하고 있는 정책 등에 대한 구체적인 사항에 대해서는 개청 이후에 설명하겠다며 말을 아꼈습니다.\n\n\n\n노경원 우주청 차장 내정자는 “전문가들과 우주청 비전과 임무, 주요 사업에 대한 전략 기획과 검토 과정에 있다”며 “준비되면 우주청이 출범한 후 정리해 발표할 수 있을 것”이라고 말했습니다.\n\n\n\n내정자들은 현 시점에서 우주청 개청 준비의 가장 큰 과제로 주요 연구 임무를 맡을 부문장 인선을 꼽았습니다.\n\n\n\n윤 내정자는 “임무본부 산하 부문장 역할이 매우 중요하다고 생각한다”며 “굉장히 심사숙고하며 하고 있어 약간 시간이 걸릴 것”이라고 말했습니다.\n\n\n\n우주항공청은 오는 27일 경남 사천에서 개청합니다. 정원은 총 293명으로 개청 시점엔 약 100명이 넘는 인원이 일을 시작할 것으로 보입니다.\n\n\n\n[사진 출처 : 연합뉴스]\n\n\n\n■ 제보하기\n\n▷ 카카오톡 : 'KBS제보' 검색, 채널 추가\n\n▷ 전화 : 02-781-1234, 4444\n\n▷ 이메일 : kbs1234@kbs.co.kr\n\n▷ 유튜브, 네이버, 카카오에서도 KBS뉴스를 구독해주세요!",
-        "createdDate": "2024-05-03T03:10:00",
-        "image": "http://news.kbs.co.kr/data/news/2024/05/02/20240502_I1QEu4.jpg",
-        "link": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=7954616&ref=A",
-        "articleTime": "00:02:21"
-      },
-  ]
-}
-
 const scrabdummydata = [
   {
     "uuidArticleId": "b64b8364-d297-4df0-af90-328c80f103ae",
@@ -112,6 +45,8 @@ function Feed() {
   const [scrabList,setScrabList] = useState([]);// 스크랩 데이터 받아옴
   const [bookmarkStates,setBookmarkStates] = useState([]); // 즐겨찾기 상태 true인지 false인지
   const memberId = localStorage.getItem('memberId')
+  const timer = localStorage.getItem('timer');
+  const category = localStorage.getItem('category');
   const navigate = useNavigate();
   const handleFeedState = (state) => {
       setFeedState(state);
@@ -121,35 +56,53 @@ function Feed() {
   }
   useEffect(() => {
     // - api통신 -
-    // const fetchFeed = async() => {
-    //   try{
-    //     const response = await axios.get('api');
-    //     setFeedList(response.data);
-    //   }
-    //   catch(error){
-    //     new Error(error)
-    //   }
-
-    // }
-    // fetchFeed();
+    const fetchLiveFeed = async(name) => {
+      try{
+        if(name==='실시간'){
+          const response = await axios.get('/api/articles');
+          setFeedList(response.data.articles);
+          console.log("fetchLive: ",response.data.articles);
+        }
+        else if(name==='추천'){
+          const response = await axios.get(`/api/articles/recommend?category=${category}&target=${timer}`);
+          setFeedList(response.data);
+          console.log("fetchRecommend: ",response.data);
+        }
+      }
+      catch(error){
+        new Error(error)
+      }
+    }
+    
 
     setScrabList(scrabdummydata);
     if (feedState === '실시간') {
-      setFeedList(livedummydata);
       const newBookmarkStates = {};
-      livedummydata.articles.forEach((article)=>{
+      feedList.forEach((article)=>{
         const id = article.id;
         const category = article.category;
         newBookmarkStates[article.id] ={
           id:id,
           category:category,
-          state: scrabdummydata.some((scrab)=>scrab.uuidArticleId===article.id && scrab.category===article.category),
+          state: scrabdummydata.length>0&&scrabdummydata.some((scrab)=>scrab.uuidArticleId===id)||false,
         }
       })
+      fetchLiveFeed('실시간');
       setBookmarkStates(newBookmarkStates);
     }
     else if (feedState === '추천') {
-      setFeedList(livedummydata);
+      const newBookmarkStates = {};
+      feedList.forEach((article)=>{
+        const id = article.id;
+        const category = article.category;
+        newBookmarkStates[article.id] ={
+          id:id,
+          category:category,
+          state: scrabdummydata.length>0&&scrabdummydata.some((scrab)=>scrab.uuidArticleId===article.id)||false,
+        }
+      })
+      fetchLiveFeed('추천');
+      setBookmarkStates(newBookmarkStates);
     }
     else {
       setFeedList(scrabdummydata);
@@ -165,7 +118,7 @@ function Feed() {
     }
 
   }, [feedState])
-
+  
   
   const handleBookmark=(id)=>{
     // 메인페이지에서 scrap get api불러옴 -> 리스트 비교
@@ -250,8 +203,7 @@ function Feed() {
     }
 }
 
-console.log(feedList.articles)
-  const fs = feedState === '실시간' || feedState === '추천' ? feedList.articles : feedList
+  const fs = feedState === '실시간' || feedState === '추천' ? feedList : feedList
   return (
     <div className='feed-wrap'>
       <div className='feed-header-wrap'>

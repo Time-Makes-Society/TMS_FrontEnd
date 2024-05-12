@@ -51,7 +51,7 @@ function FeedDetail({ feedType }) {
   const handleGoBack=async()=>{
     setBackWardState(true)
     try{
-      /*
+      
       const response = await axios.post('/api/members/readTime',{
         "memberId": memberId,
         "readTime": formatReadTime
@@ -62,7 +62,7 @@ function FeedDetail({ feedType }) {
         },
         "category": feedContent.category,
         "readTime": formatReadTime
-    })*/
+    })
     await console.log('읽은시간 post상태:',response.data)
     await console.log('읽은시간누적 post상태:',response2.data)
     }
@@ -71,6 +71,7 @@ function FeedDetail({ feedType }) {
     }
     navigate(-1);
   }
+  //console.log("feed",feedContent.category)
   const handleFeedState = () => {
     setFeedState(!feedState);
   }
@@ -87,34 +88,41 @@ function FeedDetail({ feedType }) {
   else{
     document.body.style.overflow = 'auto';
   }
+  const handleLike = async() => {
+    const response = await axios.post(`/api/articles/like/${id}`,{
+
+    })
+    console.log(response.data)
+  }
   useEffect(() => {
     if(feedState){
       // --임시 API 통신 code--
-       // const fetchFeedDetail = async() => {
-    //   try{
-    //     const response = await axios.get('/api/summarize/:uuid');
-    //     setFeedContent(response.data)
-    //   }
-    //   catch(error){
-    //     new Error(error)
-    //   }
-    // }
-    // fetchFeedDetail();
-      setFeedContent(dummySummaryData)
+       const fetchFeedDetail = async() => {
+      try{
+        const response = await axios.get(`/api/summarize/${id}`);
+        console.log(response.data)
+        setFeedContent(response.data)
+      }
+      catch(error){
+        new Error(error)
+      }
+    }
+    fetchFeedDetail();
+      //setFeedContent(dummySummaryData)
     }
     else{
       // --임시 API 통신 code--
-       // const fetchFeedDetail = async() => {
-    //   try{
-    //     const response = await axios.get('/api/articles/:uuid');
-    //     setFeedContent(response.data)
-    //   }
-    //   catch(error){
-    //     new Error(error)
-    //   }
-    // }
-    // fetchFeedDetail();
-      setFeedContent(dummyOriginalData)
+       const fetchFeedDetail = async() => {
+      try{
+        const response = await axios.get(`/api/articles/${id}`);
+        setFeedContent(response.data)
+      }
+      catch(error){
+        new Error(error)
+      }
+    }
+    fetchFeedDetail();
+      
     }
     
   }, [feedState])
@@ -139,9 +147,9 @@ function FeedDetail({ feedType }) {
   return (
     <>
       <FeedHeader handleGoBack={handleGoBack} commentState={commentState}/>
-      <FeedContent feedState={feedState} feedContent={feedContent} contentSize={contentSize} commentState={commentState} handleComment={() =>handleComment(true)} />
+      <FeedContent handleLike={handleLike} feedState={feedState} feedContent={feedContent} contentSize={contentSize} commentState={commentState} handleComment={() =>handleComment(true)} />
       <TimeModal/>
-      {commentState? <CommentModal setCommentState={setCommentState} articleId={id} handleComment={() =>handleComment(false)}/> : ''}
+      {commentState? <CommentModal id={id} setCommentState={setCommentState} articleId={id} handleComment={() =>handleComment(false)}/> : ''}
       <FeedFooter handleContentSizeUpDown={handleContentSizeUpDown} handleFeedState={handleFeedState} feedState={feedState}/>
     </>
 

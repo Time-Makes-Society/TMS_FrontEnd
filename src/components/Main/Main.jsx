@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,78 +7,62 @@ import Tms from '../../assets/main/T_M_S.svg';
 import Footer from '../common/Footer';
 import TimeModal from '../Modal/TimeModal';
 import { timerActions } from '../../store/count';
-const dummydata2 = [
-  {
-    "content": [
+const dummydata2 ={
+  "pageInfo": {
+      "pageNumber": 0, // 현재 페이지
+      "pageMaxSize": 5, // 최대 호출 기사 갯수
+      "pageCurrentSize": 5, // 현재 호출된 기사
+      "totalPageNumber": 2, // 모든 페이지 갯수 2개 이므로 page=0부터 page=1까지
+      "totalSize": 17 // 모든 기사 갯수
+  },
+  "articles": [
       {
-        "id": "05952014-a5b8-41d0-9571-001dc1bf1744",
-        "title": "[사설] 글로벌톱텐시티, 시민이 지켜보고 있다",
-        "createdDate": "2024-04-18T16:44:00",
-        "category": "정치",
-        "image": "https://www.incheonilbo.com/image/logo/snslogo_20220103100817.png",
-        "articleTime": "00:02:05"
+          "id": "0031b0a2-6c39-4355-bb5e-e3b751a0015a",
+          "title": "'알콩달콩' 강예슬, 전원주와 찰떡 케미..관절 건강 직접 확인",
+          "category": "연예",
+          "image": "https://thumb.mtstarnews.com/21/2024/05/2024050922212680601_1.jpg",
+          "publisher": "starnewskorea",
+          "articleTime": "00:01:32",
+          "createdDate": "2024-05-09T22:28:00"
       },
       {
-        "id": "0620ac13-6ffb-4a46-9617-cd14ca59f7f9",
-        "title": "“이스라엘, 이란 재반격 논의 중…핵시설 타격도 옵션” 전 모사드 정보국장",
-        "createdDate": "2024-04-18T16:35:00",
-        "category": "사회",
-        "image": "https://nownews.seoul.co.kr/img/upload/2024/04/18/SSC_20240418163212.jpg",
-        "articleTime": "00:03:08"
+          "id": "18e2bb0f-e579-4300-8859-5268a3528018",
+          "title": "[연예가브리핑] 원빈↑…승리·기안84↓",
+          "category": "연예",
+          "image": "https://menu.moneys.co.kr/moneyweek/thumb/2024/05/09/06/2024050914524524554_1.jpg",
+          "publisher": "moneys",
+          "articleTime": "00:02:50",
+          "createdDate": "2024-05-09T19:02:00"
       },
       {
-        "id": "06a2b2cb-2371-443c-a7b3-2739c8ef6404",
-        "title": "이복현 금감원장, 대통령실 합류설 침묵…\"죄송하다\"",
-        "createdDate": "2024-04-18T16:36:00",
-        "category": "정치",
-        "image": "http://www.newsprime.co.kr/data/photos/cdn/20240416/art_636413_1713423726.jpg",
-        "articleTime": "00:01:41"
+          "id": "365e5b7d-aeda-4e9c-abcf-7c8e7ac352fa",
+          "title": "[합천군 소식] 상수도 안전대책 추진-여성민방위대 양산리 수해복구 봉사",
+          "category": "문화",
+          "image": "https://www.kpinews.kr/data/upi/image/2024/05/09/p1065595903195352_376_thum.JPG",
+          "publisher": "kpinews",
+          "articleTime": "00:01:49",
+          "createdDate": "2024-05-10T00:20:00"
       },
       {
-        "id": "095a3504-2a4d-4755-80b6-92940e6e5b0e",
-        "title": "국립목포대·LG헬로비전, 업무협약식 개최",
-        "createdDate": "2024-04-18T16:40:00",
-        "category": "문화",
-        "image": "https://cdn.enewstoday.co.kr/news/thumbnail/202404/2116624_918813_3049_v150.jpg",
-        "articleTime": "00:01:52"
+          "id": "3bb0d5dd-c5d3-4d48-92da-ac23e7e50194",
+          "title": "KBS 뉴스",
+          "category": "문화",
+          "image": "http://news.kbs.co.kr/data/news/title_image/newsmp4/gangneung/news9/2024/05/09/20_7960206.jpg",
+          "publisher": "news",
+          "articleTime": "00:02:01",
+          "createdDate": "2024-05-09T23:46:00"
       },
       {
-        "id": "0a9ded80-7e8a-4c60-9f1b-249afa35d8a1",
-        "title": "칠리즈, K리그와 '2024 <b>경기</b> 득점공' 이벤트 진행",
-        "createdDate": "2024-04-18T16:36:00",
-        "category": "스포츠",
-        "image": "https://newsimg.sedaily.com/2024/04/18/2D7YLNLFMJ_1.jpg?ver=2019",
-        "articleTime": "00:01:38"
+          "id": "3c54b7e0-9ba6-4e18-9520-31dcc873dc71",
+          "title": "[잇슈 연예 브리핑] \"난 이제 품절녀\"…한예슬, 10살 연하 남친과 혼인신고",
+          "category": "연예",
+          "image": "https://cdn.obsnews.co.kr/news/thumbnail/202405/1440840_641515_315_v150.jpg",
+          "publisher": "obsnews",
+          "articleTime": "00:01:56",
+          "createdDate": "2024-05-09T10:06:00"
       }
-    ],
-    "pageable": {
-      "pageNumber": 0,
-      "pageSize": 5,
-      "sort": {
-        "empty": true,
-        "unsorted": true,
-        "sorted": false
-      },
-      "offset": 0,
-      "paged": true,
-      "unpaged": false
-    },
-    "last": false,
-    "totalElements": 99,
-    "totalPages": 20,
-    "first": true,
-    "size": 5,
-    "number": 0,
-    "sort": {
-      "empty": true,
-      "unsorted": true,
-      "sorted": false
-    },
-    "numberOfElements": 5,
-    "empty": false
-  }
-]
-
+  ]
+}
 
 function Main() {
   const [liveArticle, setLiveArticle] = useState([]);
@@ -86,22 +70,29 @@ function Main() {
   const dispatch = useDispatch();
   const timer = localStorage.getItem('timer');
   
+  //http://localhost:8080/api/articles/recommend?category=문화,스포츠&target=05:00
+  //const strignTime = JSON.stringify(timer)
+  const category = localStorage.getItem('category');
+  console.log('timer',timer)
+  console.log('category',category)
   useEffect(() => {
     // - api통신코드 -
-    // const fetchLiveArticle = async() =>{
-    //   try{
-    //     const response = await axios.get('/api');
-    //     setLiveArticle(response.data);
-    //   }
-    //   catch(error){
-    //     console.log(error);
-    //   }
-    // }
-    // fetchLiveArticle();
+    const fetchLiveArticle = async() =>{
+      try{
+        const response = await axios.get('/api/articles');
+        const response2 = await axios.get(`/api/articles/recommend?category=${category}&target=${timer}`)
+        console.log("response2.data",response2.data)
+        setLiveArticle(response.data.articles);
+        setRecommendArticle(response2.data)
+        console.log("fetchLivedata: ",response.data.articles)
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+    fetchLiveArticle();
     dispatch(timerActions.timer(timer))
 
-    setLiveArticle(dummydata2)
-    setRecommendArticle(dummydata2)
   }, [])
   
 
@@ -111,7 +102,8 @@ function Main() {
 
       <h3 className='title'>실시간 뉴스 기사</h3>
       <div className='live-wrap'>
-        {liveArticle.length > 0 && liveArticle[0].content.map((article, index) => (
+        {console.log("livearticle 길이",liveArticle.length)}
+        {liveArticle.map((article, index) => (
           <Link to={`/feed_detail/${article.id}`} key={article.id}>
             <div className='live-content-wrap' >
               <img src={article.image} alt="News Image" className='live-content-image' />
@@ -127,7 +119,7 @@ function Main() {
       </div>
       <h3 className='title'>추천기사</h3>
       <div className='recommend-wrap'>
-        {liveArticle.length > 0 && liveArticle[0].content.map((article, index) => (
+        {recommendArticle.map((article, index) => (
           <Link key={article.id} to={`/feed_detail/${article.id}`}>
             <div key={article.id} className='recommend-content-wrap'>
               <img src={article.image} alt="News Image" className='recommend-content-image' />

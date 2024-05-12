@@ -12,7 +12,8 @@ function Signup() {
     const [userInfo,setUserInfo] = useState({
         'loginId':'',
         'password':'',
-        'memberName':''
+        'memberName':'',
+        'memberNickname' : '',
     })
     const navigate = useNavigate();
     const handleInputChange=(identifier,value)=>{
@@ -21,19 +22,22 @@ function Signup() {
             [identifier]:value
         }))
     }
-    console.log('signupState: ', userInfo.loginId)
-    const handleSubmit = async() => {
+    console.log('signupState: ', userInfo.memberNickname)
+    const handleSubmit = async(event) => {
         // - api 통신부분 -
-        // try{
-        //     await axios.post(`/api/members/signup`,{
-        //         "loginId" :userInfo.loginId,
-        //         "password":userInfo.password,
-        //         "memberName":userInfo.memberName 
-        //     })
-        //   }
-        //   catch(error){
-        //     new Error(error)
-        //   }
+        event.preventDefault();
+        try{
+            const response = await axios.post('/api/members/signup',{
+                "loginId" :userInfo.loginId,
+                "password":userInfo.password,
+                "memberName":userInfo.memberName ,
+                'memberNickname' : userInfo.memberNickname,
+            })
+            console.log(response.data)
+          }
+          catch(error){
+            new Error(error)
+          }
         navigate('/login');
     }
     const handleBackward=()=>{
@@ -52,7 +56,7 @@ function Signup() {
                 <input placeholder='비밀번호를 입력해주세요.' name='password' onChange={(event)=>handleInputChange('password',event.target.value)} style={{ backgroundImage: `url(${pwimg})` }} />
                 <input placeholder='비밀번호 확인' style={{ backgroundImage: `url(${pwimg})` }} />
                 <label >이름</label>
-                <input placeholder='이름을 입력해주세요.' style={{ backgroundImage: `url(${nameimg})` }} />
+                <input placeholder='이름을 입력해주세요.' onChange={(event)=>handleInputChange('memberNickname',event.target.value)} style={{ backgroundImage: `url(${nameimg})` }} />
                 <div className='nickname-wrap'>
                     <label className='nickname-label' >닉네임</label>
                     <button type='button' className='overlap'>중복확인</button>
