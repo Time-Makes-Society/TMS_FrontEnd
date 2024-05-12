@@ -5,19 +5,19 @@ import { useSelector } from 'react-redux';
 import { authActions } from '../../store/auth';
 import axios from 'axios';
 const dummydata=[
-    {id:1, name:'CULTURE'},
-    {id:2, name:'ECONOMY'},
-    {id:3, name:'ENTERTAIN'},
-    {id:4, name:'POLITICS'},
-    {id:5, name:'SCIENCE'},
-    {id:6, name:'SOCIETY'},
-    {id:7, name:'SPORTS'},
-    {id:8, name:'TECHNOLOG'},
-    {id:9, name:'WORLD'},
+    {id:1, name:'문화'},
+    {id:2, name:'경제'},
+    {id:3, name:'연예'},
+    {id:4, name:'정치'},
+    {id:5, name:'과학'},
+    {id:6, name:'사회'},
+    {id:7, name:'스포츠'},
+    {id:8, name:'기술'},
+    {id:9, name:'해외'},
 ]
-const memberId = [
-    1 // 현재 로그인한 회원의 memberId가 1
-]
+// const memberId = [
+//     1 // 현재 로그인한 회원의 memberId가 1
+// ]
 function Category() {
     const [activeCategory,setActiveCategory] =useState([]);
     const navigate = useNavigate();
@@ -36,9 +36,10 @@ function Category() {
     useEffect(()=>{
         const fetchUserMemberId =async() => {
             try{
-                // const response = await axios.get('api/members/memberId');
-                // localStorage.setItem(response.data);
-                localStorage.setItem('memberId',memberId);
+                const response = await axios.get('/api/members/memberId');
+                console.log("memberId",response.data)
+                localStorage.setItem('memberId',response.data);
+                //localStorage.setItem('memberId',memberId);
             }
             catch(error){
                 new Error(error);
@@ -48,14 +49,14 @@ function Category() {
     },[])
     const handleContinue = async() => {
         // - 선택한 카테고리 API통신 추가 코드 작성 -
-        // try{
-        //     await axios.post(`/api/members/${memberId}/tag`,{
-        //         activeCategory
-        //     })
-        // }
-        // catch(error){
-        //     new Error(error)
-        // }
+        try{
+            const memberId = localStorage.getItem('memberId');
+            const response = await axios.post(`/api/members/${memberId}/tag`,activeCategory)
+            console.log(response.data)
+        }
+        catch(error){
+            new Error(error)
+        }
         navigate("/timeset")
         
     }

@@ -50,13 +50,33 @@ const dummydata = [
     original:'6분',
   },
 ];
-const top4data=[
-  {id:1, category:'It', percentage:35},
-  {id:2, category:'sports', percentage:40},
-  {id:3, category:'technology', percentage:20},
-  {id:4, category:'science', percentage:5},
-]
-
+// const top4data=[
+//   {id:1, category:'It', percentage:35},
+//   {id:2, category:'sports', percentage:40},
+//   {id:3, category:'technology', percentage:20},
+//   {id:4, category:'science', percentage:5},
+// ]
+const top4data={
+  "topCategories": [
+      {
+          "percentage": 31,
+          "category": "world"
+      },
+      {
+          "percentage": 23,
+          "category": "entertain"
+      },
+      {
+          "percentage": 23,
+          "category": "politics"
+      },
+      {
+          "percentage": 23,
+          "category": "culture"
+      }
+  ],
+  "memberId": 1
+}
 const userInfoDummyData = [
   {
       "loginId": "test",
@@ -78,17 +98,19 @@ function Mypage() {
   console.log('redux password state', password);
   const handleLogout=async()=>{
     // - api 통신 코드 -
-    // try{
-    //   await axios.post('/api/logout',{
-    //     "loginId": loginId,
-    //     "password": password
-    //   })
-    // }
-    // catch(error){
-    //   new Error(error)
-    // }
+    try{
+      const response = await axios.post('/api/logout',{
+        "loginId": loginId,
+        "password": password
+      })
+      console.log("logout",response.data)
+    }
+    catch(error){
+      new Error(error)
+    }
     localStorage.clear();
     dispatch(loginActions.logout());
+    
     navigate('/login');
   }
   
@@ -98,10 +120,11 @@ function Mypage() {
     // -- userInfo api 통신 코드 -- 
     const fetchUserInfo = async() => {
       try{
-        //const response = await axios.get('/api/members/get/{memberId}');
-        //setUserInfo(response.data);
-        //const response2 = await axios.get('/api/members/readTimeRank/{memberId});
-        setUserInfo(userInfoDummyData[0])
+        const response = await axios.get(`/api/members/get/${memberId}`);
+        console.log('userInfo: ',response.data)
+        setUserInfo(response.data[0]);
+        //const response2 = await axios.get(`/api/members/topCategories/${memberId}`);
+        //console.log("top4data",response2.data)
       }
       catch(error){
         new Error(error);

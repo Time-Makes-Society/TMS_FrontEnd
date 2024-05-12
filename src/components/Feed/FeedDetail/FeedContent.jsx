@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import like from '../../../assets/feedDetail/like.svg';
 import comment from '../../../assets/feedDetail/comment.svg';
 import { Link } from 'react-router-dom';
-function FeedContent({feedContent,feedState,contentSize,commentState,handleComment}) {
-  const [commentModalState, setCommentModalState] = useState(false);
+function FeedContent({handleLike,feedContent,feedState,contentSize,commentState,handleComment}) {
   
   return (
     <div className='feedDetail-content-wrap'>
@@ -23,7 +22,7 @@ function FeedContent({feedContent,feedState,contentSize,commentState,handleComme
           {feedContent.reporter}
         </p>
         <div className='like-comment-wrap'>
-          <img src={like} alt='like-image' />
+          <img src={like} alt='like-image' onClick={()=>handleLike()}/>
           <span>{feedContent.like}</span>
           <img src={comment} alt='comment-image' onClick={handleComment} />
           <span>{feedContent.comment_count}</span>

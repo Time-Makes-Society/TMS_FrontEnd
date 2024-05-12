@@ -25,7 +25,7 @@ const dummydata = [
     "memberName": "testUser"
   }
 ]
-function CommentModal({ setCommentState, articleId, handleComment }) {
+function CommentModal({ id,setCommentState, articleId, handleComment }) {
   const [commentData, setCommentData] = useState([]);
   const [buttonState, setButtonState] = useState('인기순');
   const memberName = localStorage.getItem('memberName');
@@ -35,12 +35,14 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
   const [currentCommentId, setCurrentCommentId] = useState();//option버튼 눌렀을 때 댓글 id
   const [currentCommentName,setCurrentCommentName] = useState('');//option버튼 눌렀을 때 댓글 작성자
   const [updateButton,setUpdateButton] = useState(false);
+  //console.log('articleid',id)
   useEffect(() => {
     const fetchComment = async () => {
       try {
-        //const response = await axios.get('api/comment/articleId')
-        //setCommentData(response.data);
-        setCommentData(dummydata);
+        const response = await axios.get(`/api/comment/${id}`);
+        console.log('comment fetch',response.data)
+        setCommentData(response.data);
+        //setCommentData(dummydata);
       }
       catch (error) {
         new Error(error)
@@ -76,15 +78,15 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
   //댓글 post
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // try{
-    //   const response = await axios.post('/api/comment/articleId',{
-    //     "content": newComment,
-    //   })
-    //   console.log(response.data)
-    // }
-    // catch(error){
-    //   new Error(error)
-    // }
+     try{
+       const response = await axios.post(`/api/comment/${id}`,{
+         "content": newComment,
+       })
+       console.log('post 댓글: ',response.data)
+     }
+     catch(error){
+       new Error(error)
+     }
     const newId = commentData.length + 1
     setCommentData((preValue) => ([
       {
@@ -97,7 +99,7 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
   }
   //댓글 수정
   const handleUpdate=async(id,value) =>{
-    /*
+    
     try {
       const response = await axios.put(`/api/comment/${articleId}/${id}`, {
         "content": value,
@@ -106,8 +108,8 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
     }
     catch (error) {
       new Error(error)
-    }*/
-    const newCommentData = commentData.map((comment) => {
+    }
+    const newCommentData =commentData.length>0 &&commentData.map((comment) => {
       if(comment.id===id){
         return{
           ...comment,
@@ -122,13 +124,13 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
   }
   //댓글 삭제
   const handleDelete = async (id) => {
-    // try {
-    //   const response = await axios.delete(`/api/comment/${articleId}/${id}`)
-    //   console.log(response.data)
-    // }
-    // catch (error) {
-    //   new Error(error)
-    // }
+     try {
+       const response = await axios.delete(`/api/comment/${articleId}/${id}`)
+       console.log(response.data)
+     }
+     catch (error) {
+       new Error(error)
+     }
     const newRemove = [...commentData];
     const result = newRemove.filter((data) => data.id !== id)
     console.log("remove결과", newRemove);
@@ -140,7 +142,7 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
   }
   const isMyComment = updateListState[currentCommentId]?.state && memberName === currentCommentName;
    
-    console.log("name",currentCommentName)
+    //console.log("name",currentCommentName)
   return (
     <>
       <div className='bg-dark' onClick={() => setCommentState(false)} />
@@ -164,7 +166,7 @@ function CommentModal({ setCommentState, articleId, handleComment }) {
         <span className='line' />
 
         <div className='content-wrap'>
-          {commentData.map((comment, index) => (
+          {commentData.length>0&&commentData.map((comment, index) => (
             <div className='content' key={comment.id}>
               <div className='profile-image' style={{ backgroundImage: `url(${profileimage})` }} />
               <div className='comment-wrap'>

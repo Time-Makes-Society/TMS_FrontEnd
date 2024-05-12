@@ -35,16 +35,17 @@ function Login() {
   }
   const handleLogin=async(event)=>{
     event.preventDefault();
-    // -- Api post 연결 code --
-    // try{
-    //   await axios.post(`/api/login`,{
-    //     "loginId": enterValue.loginId,
-    //     "password": enterValue.password
-    //   })
-    // }
-    // catch(error){
-    //   new Error(error)
-    // }
+    //-- Api post 연결 code --
+    try{
+      const response=await axios.post(`/api/login`,{
+        "loginId": enterValue.loginId,
+        "password": enterValue.password
+      })
+      console.log(response.data)
+    }
+    catch(error){
+      new Error(error)
+    }
     
     localStorage.setItem('loginId',enterValue.loginId)
     localStorage.setItem('password',enterValue.password)
