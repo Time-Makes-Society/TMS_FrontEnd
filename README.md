@@ -10,3 +10,8 @@
 # 최적화
 
 1. lazy를 이용한 최적화 진행
+
+# 와이어프레임
+![image](https://github.com/Time-Makes-Society/TMS_FrontEnd/assets/100831607/18165795-e9b3-4f19-9ecf-8eed89a2feeb)
+![image](https://github.com/Time-Makes-Society/TMS_FrontEnd/assets/100831607/b81f72da-ce32-4ea7-a7f7-7bae32742b35)
+![image](https://github.com/Time-Makes-Society/TMS_FrontEnd/assets/100831607/32f00d12-5fe6-4648-98c9-16b78059ef08)
