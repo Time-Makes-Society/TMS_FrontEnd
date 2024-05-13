@@ -28,7 +28,7 @@ function App() {
           <Route path='/home' element={<Main />} />
           <Route path='/feed' element={<Feed />} />
           <Route path='/mypage' element={<Mypage />} />
-          <Route path='/feed_detail/:id' element={<FeedDetail />} />
+          <Route path='/feed_detail/:name/:id' element={<FeedDetail />} />
           <Route path='/modal' element={<UpdateModal/>} />
           <Route path='/timeout' element={<TimeOut/>}/>
           <Route path='/loading' element={<Loading loading={true}/>}/>
