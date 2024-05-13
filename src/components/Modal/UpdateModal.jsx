@@ -6,6 +6,7 @@ function UpdateModal(
       event.preventDefault();
       handleUpdate(currentCommentId,newComment)
     }
+    
   return (
     <>
       <div className='update-modal-bg' onClick={() => { setGotoUpdate(false); setUpdateButton(false) }} />

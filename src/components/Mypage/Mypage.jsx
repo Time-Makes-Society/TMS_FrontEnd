@@ -50,48 +50,15 @@ const dummydata = [
     original:'6분',
   },
 ];
-// const top4data=[
-//   {id:1, category:'It', percentage:35},
-//   {id:2, category:'sports', percentage:40},
-//   {id:3, category:'technology', percentage:20},
-//   {id:4, category:'science', percentage:5},
-// ]
-const top4data={
-  "topCategories": [
-      {
-          "percentage": 31,
-          "category": "world"
-      },
-      {
-          "percentage": 23,
-          "category": "entertain"
-      },
-      {
-          "percentage": 23,
-          "category": "politics"
-      },
-      {
-          "percentage": 23,
-          "category": "culture"
-      }
-  ],
-  "memberId": 1
-}
-const userInfoDummyData = [
-  {
-      "loginId": "test",
-      "password": "test!",
-      "memberName": "testUser",
-      "memberNickname": "testNickname",
-      "totalReadTime": "00:08:00"
-  }
-]
+
+
 function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
   const loginId = localStorage.getItem('loginId');
   const password = localStorage.getItem('password');
   const memberId = localStorage.getItem('memberId');
   const memberName = localStorage.getItem('memberName');
+  const [top4Data,setTop4Data]  = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   console.log('redux login state:',loginId);
@@ -123,8 +90,9 @@ function Mypage() {
         const response = await axios.get(`/api/members/get/${memberId}`);
         console.log('userInfo: ',response.data)
         setUserInfo(response.data[0]);
-        //const response2 = await axios.get(`/api/members/topCategories/${memberId}`);
-        //console.log("top4data",response2.data)
+        const response2 = await axios.get(`/api/members/topCategories/${memberId}`);
+        setTop4Data(response2.data)
+        console.log("top4data",response2.data.topCategories)
       }
       catch(error){
         new Error(error);
@@ -141,7 +109,7 @@ function Mypage() {
       </div>
       <Profile userInfo={userInfo} handleLogout={handleLogout}/>
       <Bar userInfo={userInfo} dummydata={dummydata}/>
-      <Top top4data={top4data}/>
+      <Top top4data={top4Data}/>
       <TimeModal/>
       <Footer footerState={'user'} />
     </>
