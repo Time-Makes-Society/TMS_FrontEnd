@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { timerActions } from '../../store/count';
 import axios from 'axios';
 function TimeSet() {
-    const [Time, setTime] = useState();
+    const [Time, setTime] = useState(0);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const memberId = localStorage.getItem('memberId')

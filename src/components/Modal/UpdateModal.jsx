@@ -24,7 +24,7 @@ function UpdateModal(
             </>}
           </>
           :
-          <button>신고하기</button>
+          <button onClick={()=>setGotoUpdate(false)}>신고하기</button>
         }
 
       </div>

@@ -20,6 +20,7 @@ function Login() {
     password: '',
     memberName:'임형준',
   })
+  const [isData,setIsData] = useState(true);
   const dispatch = useDispatch()
   const [showPassWord,setShowPassWord] = useState(false);
   const navigate=useNavigate()
@@ -42,17 +43,19 @@ function Login() {
         "password": enterValue.password
       })
       console.log(response.data)
+      navigate('/category');
     }
     catch(error){
       new Error(error)
+      setIsData(false);
     }
     
     localStorage.setItem('loginId',enterValue.loginId)
     localStorage.setItem('password',enterValue.password)
-    localStorage.setItem('memberName',enterValue.memberName)
+    //localStorage.setItem('memberName',enterValue.memberName)
     dispatch(loginActions.login(enterValue))
     dispatch(authActions.login());
-    navigate('/category');
+    
   }
   const passwordInputType = showPassWord ? 'text' : 'password';
   const handleShowPassWord=()=>{
@@ -69,6 +72,7 @@ function Login() {
         <img src={Tms} className='login-logo' alt='TmsLogo' />
         <input placeholder='아이디' id='loginId' name='loginId' className='login-input' onChange={(event)=> handleInputChange('loginId',event.target.value)}/>
         <input placeholder='비밀번호' id='password' name='password' type={passwordInputType} className='login-input' onChange={(event)=> handleInputChange('password',event.target.value)} />
+        {isData ? '' : <p className='isData'>아이디와 비밀번호를 확인하세요.</p>}
         <label className='login-checkbox'>
           <input type="checkbox" className={`pw-checkbox ${showPassWord ? 'active' : ''} `} checked={showPassWord} onChange={handleShowPassWord} /> 비밀번호 보기
         </label>

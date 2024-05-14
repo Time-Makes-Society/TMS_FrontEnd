@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../common/Footer'
-import Scrab from '../../assets/feed/scrab.svg';
-import Option from '../../assets/feed/option.svg';
 import FeedContent from './FeedContent';
 import TimeModal from '../Modal/TimeModal';
-import { scrabdummydata } from './data';
+import {useInView} from 'react-intersection-observer';
 function Feed() {
   const [feedState, setFeedState] = useState('실시간'); //피드의 카테고리
   const [feedList, setFeedList] = useState([]);// 피드 데이터 받아옴
+  const [liveList,setLiveList] = useState([]); // 실시간데이터
   const [scrabList, setScrabList] = useState([]);// 스크랩 데이터 받아옴
   const [bookmarkStates, setBookmarkStates] = useState([]); // 즐겨찾기 상태 true인지 false인지
+  const [page,setPage] = useState(0); //페이지를 할당하기 위한 상태
+  const [ref, InView] = useInView();
   const memberId = localStorage.getItem('memberId')
   const timer = localStorage.getItem('timer');
   const category = localStorage.getItem('category');
+
   const navigate = useNavigate();
   const handleFeedState = (state) => {
     setFeedState(state);
@@ -26,16 +28,18 @@ function Feed() {
     // - api통신 -
     const fetchLiveFeed = async (name) => {
       try {
-        
         if (name === '실시간') {
-          const response = await axios.get('/api/articles');
+          const response = await axios.get(`/api/articles?page=${page}`);
           const response2 = await axios.get(`/api/${memberId}/scrap`);
           setScrabList(response2.data);
-          await setFeedList(response.data.articles);
+          setLiveList([...liveList,...(response.data.articles)]);
+          //setFeedList([...feedList,...(response.data.articles)]);
+          setPage((prev)=>prev+1);
+          console.log('pageNumber: ',page)
           console.log("fetchLive: ", response.data.articles);
           console.log('fetchScrab: ', scrabList)
           const newBookmarkStates = {};
-          response.data.articles.forEach((article) => {
+          liveList.forEach((article) => {
             const id = article.id;
             const category = article.category;
             newBookmarkStates[id] = {
@@ -102,7 +106,7 @@ function Feed() {
       setBookmarkStates(newBookmarkStates)
     }
 
-  }, [feedState])
+  }, [feedState,InView])
   const handleBookmark = (id) => {
     //즐겨찾기 삭제하는 부분
     if (feedState === '스크랩') {
@@ -113,7 +117,8 @@ function Feed() {
             "articleId": id,
           })
           console.log("post 제거:", response.data)
-          setFeedList((prev) => (prev.filter((item) => item.uuidArticleId !== id)));
+          //setFeedList((prev) => (prev.filter((item) => item.uuidArticleId !== id)));
+          setLiveList((prev) => (prev.filter((item) => item.uuidArticleId !== id)));
         }
         catch (error) {
           new Error(error);
@@ -174,23 +179,24 @@ function Feed() {
     }
   }
 
-  const fs = feedState === '실시간' || feedState === '추천' ? feedList : feedList
+  const fs = feedState==='실시간' ? liveList:feedList
   return (
     <div className='feed-wrap'>
       <div className='feed-header-wrap'>
         <button className={feedState === '실시간' ? 'feed-header active' : 'feed-header'} onClick={() => handleFeedState('실시간')}>실시간</button>
         <button className={feedState === '추천' ? 'feed-header active' : 'feed-header'} onClick={() => handleFeedState('추천')}>추천</button>
         <button className={feedState === '스크랩' ? 'feed-header active' : 'feed-header'} onClick={() => handleFeedState('스크랩')}>스크랩</button>
-
       </div>
       <div className='feed-content-wrap'>
-        {Array.isArray(fs) && fs.map((feed, index) => (
+        {Array.isArray(fs) && fs?.map((feed, index) => (
           feedState === '실시간' || feedState === '추천' ?
             <FeedContent key={index} scrabList={scrabList} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)} />
             :
             <FeedContent key={index} scrabList={scrabList} setFeedList={setFeedList} feed={feed} feedState={feedState} handleBookmark={handleBookmark} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} onClick={() => handleFeed(feed.uuidArticleId)} />
         ))}
+        <div className='scrollEnd' ref={ref}></div>
       </div>
+      
 
       <TimeModal />
       <Footer footerState={'feed'} />

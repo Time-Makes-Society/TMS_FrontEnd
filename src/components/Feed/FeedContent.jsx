@@ -4,7 +4,7 @@ import BookmarkEmpty from '../../assets/feed/bookmark-emptyy.svg';
 import BookmarkFill from '../../assets/feed/bookmark-fill.svg';
 import Option from '../../assets/feed/option.svg';
 import axios from 'axios';
-function FeedContent({feed,setFeedList,onClick,feedState,handleBookmark,bookmarkStates,setBookmarkStates}) {
+function FeedContent({feed,onClick,feedState,handleBookmark,bookmarkStates,setBookmarkStates}) {
     
     return (
         <div className='feed-content' >
