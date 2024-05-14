@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 
 import option from '../../assets/option.svg';
 import profileimage from '../../assets/playing-guitar.png';
-import like from '../../assets/feedDetail/like.svg';
 import UpdateModal from './UpdateModal';
 
 function CommentModal({ id,setCommentState, articleId, handleComment }) {
   const [commentData, setCommentData] = useState([]);
   const [buttonState, setButtonState] = useState('인기순');
   const memberName = localStorage.getItem('memberName');
+  const memberNickName = localStorage.getItem('memberNickName');
   const [newComment, setNewComment] = useState('');
   const [updateListState, setUpdateListState] = useState([]);
   const [goToUpdate, setGotoUpdate] = useState(false);//updateModal 창 띄울지 말지 결정
@@ -30,7 +30,7 @@ function CommentModal({ id,setCommentState, articleId, handleComment }) {
       }
     }
     fetchComment();
-  }, [buttonState])
+  }, [buttonState,commentData])
   const toggleButton = (title) => {
     setButtonState(title)
   }
@@ -38,7 +38,7 @@ function CommentModal({ id,setCommentState, articleId, handleComment }) {
   const handleOptionToggle = (id,name) => {
     const newOptionState = {}
     commentData.forEach((data, index) => {
-      if (data.id === id && updateListState[data.id]?.state === false) {
+      if (data.id === id ) {
         newOptionState[data.id] = {
           id: data.id,
           state: true
@@ -71,7 +71,7 @@ function CommentModal({ id,setCommentState, articleId, handleComment }) {
     const newId = commentData.length + 1
     setCommentData((preValue) => ([
       {
-        id: newId,
+        //id: newId,
         memberName: memberName,
         content: newComment
       }, ...preValue,
@@ -123,7 +123,7 @@ function CommentModal({ id,setCommentState, articleId, handleComment }) {
   }
   const isMyComment = updateListState[currentCommentId]?.state && memberName === currentCommentName;
    
-    console.log("name",currentCommentName)
+   // console.log("name",currentCommentName)
   return (
     <>
       <div className='bg-dark' onClick={() => setCommentState(false)} />

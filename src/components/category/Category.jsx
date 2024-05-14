@@ -15,9 +15,7 @@ const dummydata=[
     {id:8, name:'기술'},
     {id:9, name:'해외'},
 ]
-// const memberId = [
-//     1 // 현재 로그인한 회원의 memberId가 1
-// ]
+
 function Category() {
     const [activeCategory,setActiveCategory] =useState([]);
     const navigate = useNavigate();
@@ -37,9 +35,12 @@ function Category() {
         const fetchUserMemberId =async() => {
             try{
                 const response = await axios.get('/api/members/memberId');
+                const response2 = await axios.get(`/api/members/get/${response.data}`)
                 console.log("memberId",response.data)
+                console.log('userInfo',response2.data)
                 localStorage.setItem('memberId',response.data);
-                //localStorage.setItem('memberId',memberId);
+                localStorage.setItem('memberName',response2.data[0].memberName)
+                localStorage.setItem('memberNickname',response2.data[0].memberNickname)
             }
             catch(error){
                 new Error(error);

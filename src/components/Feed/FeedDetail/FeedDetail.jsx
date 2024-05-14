@@ -24,6 +24,7 @@ function FeedDetail({ feedType }) {
   const [loading,setLoading] = useState(true);//api 호출할 때 렌더링 과정중 로딩표현
   const { name,id } = useParams();
   const memberId = localStorage.getItem('memberId');
+  const getTime = localStorage.getItem('readTime');
   const navigate = useNavigate();
   //console.log("feedDetail:", id);
   const handleGoBack = async () => {
@@ -47,6 +48,8 @@ function FeedDetail({ feedType }) {
     catch (error) {
       new Error(error);
     }
+    const accumulateTime = readTime+Number(getTime) ;
+    localStorage.setItem('readTime',accumulateTime)
     navigate(-1);
   }
   //console.log("feed",feedContent.category)
@@ -69,12 +72,12 @@ function FeedDetail({ feedType }) {
   const handleLike = async () => {
     if (likeStates?.liked) {
       //delete
-      const response = await axios.delete(`/api/articles/like/${id}`, {
+      const response = await axios.delete(`/api/articles/like/${id}/${memberId}`, {
       })
       console.log(response.data)
     }
     else {
-      const response = await axios.post(`/api/articles/like/${id}`, {
+      const response = await axios.post(`/api/articles/like/${id}/${memberId}`, {
 
       })
       console.log(response.data)
@@ -161,7 +164,7 @@ function FeedDetail({ feedType }) {
 
   useEffect(()=>{
     const fetchLike =async()=>{
-      const response = await axios.get(`/api/articles/like/${id}`)
+      const response = await axios.get(`/api/articles/like/${id}/${memberId}`)
       setLikeStates(response.data)
     }
     fetchLike();

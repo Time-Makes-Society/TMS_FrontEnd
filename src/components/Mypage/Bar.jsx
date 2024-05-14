@@ -9,7 +9,7 @@ function Bar({userInfo,dummydata}) {
     <div className='statistics-bar-wrap'>
         <div className='statistics-header-wrap'>
           <div className='header-title'>
-            <p>{userInfo.memberName}님은</p>
+            <p>{userInfo.memberName}님은 총</p>
             <p> <span className='time'>{userInfo.totalReadTime}</span> 절약했어요!</p>
           </div>
           <img src={infoCircle} alt='infoCircle-image' />
