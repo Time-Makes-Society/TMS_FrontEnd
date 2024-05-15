@@ -36,7 +36,7 @@ function FeedContent({loading,likeStates,setLikeStates,handleLike,feedContent,fe
 
         </div>
         <p className={`${contentSize ? 'feedDetail-content-thebody active' : 'feedDetail-content-thebody'}`}>
-          {loading&&feedState? <FeedLoading/> :feedContent.content}
+          {loading&&feedState? <FeedLoading isSimilar={false}/> :feedContent.content}
         </p>
       </div>
   )
