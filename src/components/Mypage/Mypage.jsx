@@ -54,11 +54,12 @@ const dummydata = [
 
 function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
+  const [top4Data,setTop4Data]  = useState();
+  const [readTimeBar, setReadTimeBar] = useState([]);
+
   const loginId = localStorage.getItem('loginId');
   const password = localStorage.getItem('password');
   const memberId = localStorage.getItem('memberId');
-  const memberName = localStorage.getItem('memberName');
-  const [top4Data,setTop4Data]  = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   console.log('redux login state:',loginId);
@@ -93,6 +94,9 @@ function Mypage() {
         const response2 = await axios.get(`/api/members/topCategories/${memberId}`);
         setTop4Data(response2.data)
         console.log("top4data",response2.data.topCategories)
+        const response3 = await axios.get(`/api/members/categoryReadTime/${memberId}`);
+        console.log("누적시간: ",response3.data.data)
+        setReadTimeBar(response3.data.data);
       }
       catch(error){
         new Error(error);
@@ -100,6 +104,7 @@ function Mypage() {
     }
     fetchUserInfo();
   }, [])
+  // 
   return (
     <>
       <div className='mypage-header-wrap'>
@@ -108,7 +113,7 @@ function Mypage() {
         <img src={option} className='option' alt='option-image' />
       </div>
       <Profile userInfo={userInfo} handleLogout={handleLogout}/>
-      <Bar userInfo={userInfo} dummydata={dummydata}/>
+      <Bar userInfo={userInfo} dummydata={readTimeBar}/>
       <Top top4data={top4Data}/>
       <TimeModal/>
       <Footer footerState={'user'} />

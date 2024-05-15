@@ -7,18 +7,11 @@ import { Link,useNavigate } from 'react-router-dom';
 import { authActions } from '../../store/auth';
 import axios from 'axios';
 import { loginActions } from '../../store/Login';
-const dummydata = [
-  {
-      "loginId": "lhj6364",
-      "password": "1234",
-      "memberName": "임형준",
-  }
-]
 function Login() {
   const [enterValue, setEnterValues] = useState({
     loginId: '',
     password: '',
-    memberName:'임형준',
+    memberName:'',
   })
   const [isData,setIsData] = useState(true);
   const dispatch = useDispatch()
@@ -43,7 +36,7 @@ function Login() {
         "password": enterValue.password
       })
       console.log(response.data)
-      navigate('/category');
+      navigate('/entrance');
     }
     catch(error){
       new Error(error)
@@ -52,7 +45,7 @@ function Login() {
     
     localStorage.setItem('loginId',enterValue.loginId)
     localStorage.setItem('password',enterValue.password)
-    //localStorage.setItem('memberName',enterValue.memberName)
+    
     dispatch(loginActions.login(enterValue))
     dispatch(authActions.login());
     

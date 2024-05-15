@@ -15,6 +15,7 @@ const FeedDetail = lazy(()=>import('./components/Feed/FeedDetail/FeedDetail'));
 const UpdateModal = lazy(()=>import('./components/Modal/UpdateModal'));
 const TimeOut = lazy(()=>import('./components/timeOut/TimeOut'));
 import Loading from './components/loading/Loading';
+import Entrance from './components/Entrance/Entrance';
 function App() {
   return (
     <BrowserRouter>
@@ -32,6 +33,7 @@ function App() {
           <Route path='/modal' element={<UpdateModal/>} />
           <Route path='/timeout' element={<TimeOut/>}/>
           <Route path='/loading' element={<Loading loading={true}/>}/>
+          <Route path='/entrance' element={<Entrance/>}/>
         </Routes>
       </Suspense>
     </BrowserRouter>
