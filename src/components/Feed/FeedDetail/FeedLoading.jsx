@@ -6,10 +6,10 @@ const override = {
     textAlign: 'center',
     color: '#fff',
 };
-function FeedLoading() {
+function FeedLoading({isSimilar}) {
   return (
     <div className='loading'>
-        <h3>기사 내용을 요약하고 있습니다..</h3>
+        <h3 style={{textAlign:'center'}}>기사 내용을 요약하고 있습니다..</h3>
         <ClipLoader
             cssOverride={override}
             speedMultiplier={0.8}

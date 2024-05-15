@@ -21,7 +21,7 @@ function FeedContent({loading,likeStates,setLikeStates,handleLike,feedContent,fe
           </span>
         </p>
         <p className='feedDetail-content-reporter'>
-          {feedContent.reporter}
+          {feedContent.publisher}
         </p>
         <div className='like-comment-wrap'>
           <img src={likeStates?.liked ? Filllike : like} alt='like-image' onClick={()=>handleLike()}/>
