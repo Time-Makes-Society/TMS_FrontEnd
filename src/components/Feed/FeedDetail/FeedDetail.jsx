@@ -130,8 +130,8 @@ function FeedDetail({ feedType }) {
       const fetchFeedDetail = async () => {
         try {
           const response = await axios.get(`/api/articles/${id}`);
-          //setLoading(false)
-          console.log("response data", response.data);
+          const response2 = await axios.get(`/api/articles/similarity/${id}`) ;
+          console.log("response2 data", response2.data);
           setFeedContent(response.data)
           
         }

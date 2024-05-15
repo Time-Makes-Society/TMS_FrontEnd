@@ -50,15 +50,22 @@ function Category() {
     },[])
     const handleContinue = async() => {
         // - 선택한 카테고리 API통신 추가 코드 작성 -
-        try{
-            const memberId = localStorage.getItem('memberId');
-            const response = await axios.post(`/api/members/${memberId}/tag`,activeCategory)
-            console.log(response.data)
+        if(activeCategory===null||activeCategory===undefined||activeCategory.length===0){
+            alert('카테고리를 설정해주세요!')
         }
-        catch(error){
-            new Error(error)
+        else{
+            try{
+                const memberId = localStorage.getItem('memberId');
+                const response = await axios.post(`/api/members/${memberId}/tag`,activeCategory)
+                console.log(response.data)
+                navigate("/timeset")
+            }
+            catch(error){
+                new Error(error)
+            }
         }
-        navigate("/timeset")
+        
+        
         
     }
     console.log("auth상태",auth)

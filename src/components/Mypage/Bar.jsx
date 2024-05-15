@@ -17,8 +17,8 @@ function Bar({userInfo,dummydata}) {
         <div className='bar-wrap'>
           {dummydata.map((data,index)=>(
              <div key={index} className='individual-wrap'>
-                <span className='bar'>{data.summary}</span>
-                <span className='date'>{data.date}</span>
+                <span className='bar'>{data.time}</span>
+                <span className='date'>{data.category}</span>
               </div>
           ))}
         </div>
