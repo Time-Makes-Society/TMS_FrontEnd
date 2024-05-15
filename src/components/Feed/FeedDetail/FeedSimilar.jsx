@@ -24,7 +24,7 @@ function FeedSimilar({ }) {
             <Link to={`/feed_detail/${name}/${id}`}>
                 <img src={backward} alt='backward-image' className='backward-image' />
             </Link>
-            {isLoading ? <FeedLoading/> :<SimilarContent memberNickname={memberNickname} name={name} similarDataList={similarDataList} />}
+            {isLoading ? <FeedLoading isSimilar={true}/> :<SimilarContent memberNickname={memberNickname} name={name} similarDataList={similarDataList} />}
         </div>
     )
 }
