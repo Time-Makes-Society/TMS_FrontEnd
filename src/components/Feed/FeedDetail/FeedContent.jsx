@@ -14,15 +14,15 @@ function FeedContent({loading,likeStates,setLikeStates,handleLike,feedContent,fe
           {feedContent.title}
         </p>
         <p className='feedDetail-content-date'>
-          입력
-          <span style={{ marginLeft: '7px', marginRight: '7px' }}>{feedContent.createdDate}</span>
+          입력 
+          <span style={{ marginLeft: '7px', marginRight: '7px' }}>{feedContent.createdDate} {feedContent.category}</span>
           
           <span className='feedDetail-content-articlestate'>
             {feedState ? '기사요약' : '기사원문'}
           </span>
         </p>
         <p className='feedDetail-content-reporter'>
-          평균 읽는 시간: {feedContent.articleTime}
+          평균 읽는 시간: {feedContent.articleTime} 
         </p>
         <div className='like-comment-wrap'>
         <motion.div

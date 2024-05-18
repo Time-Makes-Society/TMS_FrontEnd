@@ -96,6 +96,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
         .header-title{
             display: flex;
             flex-direction: column;
@@ -117,6 +118,22 @@
             display: block;
             width: 18px;
             height: 18px;
+        }
+        .explain{
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            display: block;
+            width: auto;
+            height: 45px;
+           
+        }
+        .explain-text{
+            position: absolute;
+            right: 25px;
+            top: 45px;
+            font-size: 12px;
+            font-weight: 700;
         }
     }
     .bar-wrap{

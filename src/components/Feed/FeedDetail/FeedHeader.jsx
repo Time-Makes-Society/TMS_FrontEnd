@@ -1,7 +1,9 @@
 import React from 'react'
 
-import backward from '../../../assets/backward.svg';
-import foreward from '../../../assets/foreward.svg';
+//import backward from '../../../assets/backward.svg';
+//import foreward from '../../../assets/foreward.svg';
+import foreward from '../../../assets/foreward2.png';
+import backward from '../../../assets/backward2.png';
 import { Link } from 'react-router-dom';
 function FeedHeader({ name,id, commentState, handleGoBack }) {
     return (

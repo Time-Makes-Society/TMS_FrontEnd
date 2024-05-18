@@ -33,6 +33,9 @@ function FeedDetail({ feedType }) {
   //console.log("feedDetail:", id);
   const handleGoBack = async () => {
     setBackWardState(true)
+    if(name==='추천'){
+      localStorage.setItem('seen',true)
+    }
     try {
 
       const response = await axios.post('/api/members/readTime', {
