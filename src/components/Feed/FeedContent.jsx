@@ -19,7 +19,7 @@ function FeedContent({ feed, onClick, feedState, handleBookmark, bookmarkStates,
                 </div>
 
                 <motion.img
-                    whileHover={{ scale: 1.5 }}
+                    whileTap={{ scale: 1.5 }}
                     transition={{ type: 'spring', stiffness: 500 }}
                     src={(feedState === '스크랩' ?
                         bookmarkStates[feed.uuidArticleId]?.state : bookmarkStates[feed.id]?.state) ? BookmarkFill : BookmarkEmpty}

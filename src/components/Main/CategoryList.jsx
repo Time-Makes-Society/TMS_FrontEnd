@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 function CategoryList({ item, handleCategoryList }) {
     return (
-        <motion.div
+        <motion.li
+
             variants={{
                 hidden: { opacity: 0, scale: 0.5 },
                 visible: { opacity: 1, scale: 1 },
@@ -12,12 +13,12 @@ function CategoryList({ item, handleCategoryList }) {
             transition={{ type: 'spring' }}
             className='main-category-content-wrap'>
             <Link to={`/category_articles/${item.name}`}>
-                <div className='category' onClick={handleCategoryList}>
+                <div className='category'>
                     <img src={item.img} alt='catgory-image' />
                 </div>
             </Link>
             <p className='main-category-content-text'>{item.name}</p>
-        </motion.div>
+        </motion.li>
     )
 }
 

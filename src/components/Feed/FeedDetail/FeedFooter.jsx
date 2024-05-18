@@ -22,7 +22,7 @@ function FeedFooter({scrabState,handleScrab,handleFeedState,handleContentSizeUpD
         <div className='feedDetail-footer-image-wrap'>
           <img src={share} className='feedDetail-footer-image' alt='share-image'/>
           <motion.div
-            whileHover={{scale:1.5}}
+            whileTap={{scale:1.5}}
             transition={{ type:'spring',stiffness:500}}
           >
           <img 

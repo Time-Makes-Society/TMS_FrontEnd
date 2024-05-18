@@ -70,27 +70,14 @@ function Main() {
       </div>
       <h3 className='title'>카테고리별로 기사를 찾아보세요!</h3>
       <motion.ul
+        initial="hidden"
+        animate="visible"
         variants={{
           visible: { transition: { staggerChildren: 0.05 } }
         }}
         className='main-category-wrap'>
         {dummydata.map((item) => (
-          <motion.li
-          variants={{
-              hidden: { opacity: 0, scale: 0.5 },
-              visible: { opacity: 1, scale: 1 },
-          }}
-          exit={{ opacity: 1, scale: 1 }}
-          transition={{ type: 'spring' }}
-          className='main-category-content-wrap'>
-          <Link to={`/category_articles/${item.name}`}>
-              <div className='category'>
-                  <img src={item.img} alt='catgory-image' />
-              </div>
-          </Link>
-          <p className='main-category-content-text'>{item.name}</p>
-      </motion.li>
-
+          <CategoryList item={item}/>
         ))}
       </motion.ul>
 

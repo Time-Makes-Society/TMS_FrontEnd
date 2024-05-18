@@ -26,7 +26,7 @@ function FeedContent({loading,likeStates,setLikeStates,handleLike,feedContent,fe
         </p>
         <div className='like-comment-wrap'>
         <motion.div
-            whileHover={{scale:1.5}}
+            whileTap={{scale:1.5}}
             transition={{ type:'spring',stiffness:500}}
           >
             <img src={likeStates?.liked ? Filllike : like} alt='like-image' onClick={()=>handleLike()}/>
