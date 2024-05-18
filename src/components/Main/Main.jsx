@@ -9,6 +9,7 @@ import TimeModal from '../Modal/TimeModal';
 import { timerActions } from '../../store/count';
 import { dummydata } from '../Feed/data';
 import random_image from '../../assets/main/random.png';
+import CategoryList from './CategoryList';
 function Main() {
   const [liveArticle, setLiveArticle] = useState([]);
   const [recommendArticle, setRecommendArticle] = useState([]);
@@ -70,14 +71,7 @@ function Main() {
       <h3 className='title'>카테고리별로 기사를 찾아보세요!</h3>
       <div className='main-category-wrap'>
         {dummydata.map((item) => (
-          <div className='main-category-content-wrap'>
-            <Link to={`/category_articles/${item.name}`}>
-            <div className='category'>
-              <img src={item.img} alt='catgory-image' />
-            </div>
-            </Link>
-            <p className='main-category-content-text'>{item.name}</p>
-          </div>
+          <CategoryList item={item}/>
 
         ))}
       </div>
