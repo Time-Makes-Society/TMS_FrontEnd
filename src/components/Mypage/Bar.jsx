@@ -20,10 +20,12 @@ function Bar({readTimeBar,setReadTimeBar,userInfo}) {
   }
   const calculateBarHeight = (time) => {
     if (time === 0) {
-      return 10; 
+      return 5; 
+    }
+    else{
+      return 5 + time;
     }
   
-    return time;
   };
   return (
     <div className='statistics-bar-wrap'>
@@ -37,8 +39,9 @@ function Bar({readTimeBar,setReadTimeBar,userInfo}) {
         <div className='bar-wrap'>
           {readTimeBar?.map((data,index)=>(
              <div key={index} className='individual-wrap'>
-                <span className='bar' style={{height:`${calculateBarHeight(data.time)}px`}}>{toStringReadTime(data.time)}</span>
+                <span className='bar' style={{height:`${calculateBarHeight(data.time)}px`}}/>
                 <span className='date'>{data.category}</span>
+                <span className='time'>{toStringReadTime(data.time)}</span>
               </div>
           ))}
         </div>

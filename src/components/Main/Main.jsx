@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, json, useNavigate,  } from 'react-router-dom';
+import { Link, json, useNavigate, } from 'react-router-dom';
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
-
+import { motion } from 'framer-motion';
 import Tms from '../../assets/main/T_M_S.svg';
 import Footer from '../common/Footer';
 import TimeModal from '../Modal/TimeModal';
@@ -15,7 +15,6 @@ function Main() {
   const [recommendArticle, setRecommendArticle] = useState([]);
   const dispatch = useDispatch();
   const timer = localStorage.getItem('timer');
-  const memberNickname = localStorage.getItem('memberNickname')
   const category = localStorage.getItem('category');
   const navigate = useNavigate();
   console.log('timer', timer)
@@ -40,10 +39,10 @@ function Main() {
 
   }, [])
   const handleGotoRandom = () => {
-    const randomNumber = Math.floor(Math.random()*dummydata.length);
+    const randomNumber = Math.floor(Math.random() * dummydata.length);
     const randomName = dummydata[randomNumber].name
     navigate(`/category_articles/${randomName}`)
-    
+
   }
 
   return (
@@ -60,7 +59,8 @@ function Main() {
               <span className='time'>{article.articleTime}</span>
               <div className='live-content-title-wrap'>
                 <h1 >{article.title}</h1>
-                <p >{article.category}</p>
+                <p >{article.publisher}</p>
+                <p className='category-name'>{article.category}</p>
               </div>
             </div>
           </Link>
@@ -69,19 +69,37 @@ function Main() {
         ))}
       </div>
       <h3 className='title'>카테고리별로 기사를 찾아보세요!</h3>
-      <div className='main-category-wrap'>
+      <motion.ul
+        variants={{
+          visible: { transition: { staggerChildren: 0.05 } }
+        }}
+        className='main-category-wrap'>
         {dummydata.map((item) => (
-          <CategoryList item={item}/>
+          <motion.li
+          variants={{
+              hidden: { opacity: 0, scale: 0.5 },
+              visible: { opacity: 1, scale: 1 },
+          }}
+          exit={{ opacity: 1, scale: 1 }}
+          transition={{ type: 'spring' }}
+          className='main-category-content-wrap'>
+          <Link to={`/category_articles/${item.name}`}>
+              <div className='category'>
+                  <img src={item.img} alt='catgory-image' />
+              </div>
+          </Link>
+          <p className='main-category-content-text'>{item.name}</p>
+      </motion.li>
 
         ))}
-      </div>
+      </motion.ul>
 
       <div className='main-random-wrap' onClick={handleGotoRandom}>
         <div className='main-random-text-wrap'>
           <p className='starttext'>어떤 기사를 읽어야 할지 모르겠다구요?</p>
           <p className='endtext'>TMS가 한 번 골라 볼게요!</p>
         </div>
-        <img src={random_image} className='random-image' alt='random-image'/>
+        <img src={random_image} className='random-image' alt='random-image' />
       </div>
 
       <h3 className='title'>추천기사</h3>
@@ -94,7 +112,8 @@ function Main() {
               <div className='recommend-content-title-wrap'>
                 <h1 >{article.title}</h1>
               </div>
-              <p >{article.category}</p>
+              <p className='category-name'>{article.category}</p>
+              <p>{article.publisher}</p>
             </div>
           </Link>
 

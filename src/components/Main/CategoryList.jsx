@@ -1,15 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-function CategoryList({item,handleCategoryList}) {
+import { motion } from 'framer-motion'
+function CategoryList({ item, handleCategoryList }) {
     return (
-        <div className='main-category-content-wrap'>
+        <motion.div
+            variants={{
+                hidden: { opacity: 0, scale: 0.5 },
+                visible: { opacity: 1, scale: 1 },
+            }}
+            exit={{ opacity: 1, scale: 1 }}
+            transition={{ type: 'spring' }}
+            className='main-category-content-wrap'>
             <Link to={`/category_articles/${item.name}`}>
                 <div className='category' onClick={handleCategoryList}>
                     <img src={item.img} alt='catgory-image' />
                 </div>
             </Link>
             <p className='main-category-content-text'>{item.name}</p>
-        </div>
+        </motion.div>
     )
 }
 
