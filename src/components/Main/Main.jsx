@@ -14,6 +14,7 @@ function Main() {
   const [liveArticle, setLiveArticle] = useState([]);
   const [recommendArticle, setRecommendArticle] = useState([]);
   const dispatch = useDispatch();
+  const readArticles = useSelector(state => state.readArticle.readAriticleList)
   const timer = localStorage.getItem('timer');
   const category = localStorage.getItem('category');
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Main() {
     }
     fetchLiveArticle();
     dispatch(timerActions.timer(timer))
-
+    console.log('read Articles List: ', readArticles)
   }, [])
   const handleGotoRandom = () => {
     const randomNumber = Math.floor(Math.random() * dummydata.length);
@@ -95,12 +96,13 @@ function Main() {
           <Link key={article.id} to={`/feed_detail/${'추천'}/${article.id}`}>
             <div key={article.id} className='recommend-content-wrap'>
               <img src={article.image} alt="News Image" className='recommend-content-image' />
-              <span className='time'>{article.articleTime}</span>
+              <span className='text-on-background'>{article.articleTime}</span>
               <div className='recommend-content-title-wrap'>
                 <h1 >{article.title}</h1>
               </div>
               <p className='category-name'>{article.category}</p>
               <p>{article.publisher}</p>
+              {readArticles?.includes(article.id) ? <p className='text-on-background active'>읽은 기사</p>: ''}
             </div>
           </Link>
 

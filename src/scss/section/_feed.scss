@@ -76,7 +76,7 @@
                 height: 155px;
                 border-radius: 10px 10px 0 0;
             }
-            .time{
+            .text-on-backgorund{
                 display: block;
                 position: absolute;
                 padding: 7px 10px;
@@ -89,6 +89,13 @@
                 font-size: 12px;
                 font-weight: 700;
                 color: #ffffff;
+                &.active{
+                    left: 10px;
+                    top: 10px;
+                    font-size: 12px;
+                    background-color:rgb(246, 244,245,0.8);
+                    color: #000000;
+                }
             }
             .feed-desc-wrap{
                 position: relative;

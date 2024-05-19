@@ -22,10 +22,10 @@ function Bar({readTimeBar,setReadTimeBar,userInfo}) {
   }
   const calculateBarHeight = (time) => {
     if (time === 0) {
-      return 5; 
+      return 2/2; 
     }
     else{
-      return 5 + time;
+      return (2 + time)/2;
     }
   
   };
