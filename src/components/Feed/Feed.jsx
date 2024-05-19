@@ -5,12 +5,15 @@ import Footer from '../common/Footer'
 import FeedContent from './FeedContent';
 import TimeModal from '../Modal/TimeModal';
 import {useInView} from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
 function Feed() {
   const [feedState, setFeedState] = useState('실시간'); //피드의 카테고리
   const [feedList, setFeedList] = useState([]);// 피드 데이터 받아옴
   const [liveList,setLiveList] = useState([]); // 실시간데이터
   const [scrabList, setScrabList] = useState([]);// 스크랩 데이터 받아옴
   const [bookmarkStates, setBookmarkStates] = useState([]); // 즐겨찾기 상태 true인지 false인지
+  const readArticles = useSelector(state => state.readArticle.readAriticleList);
+
   const [page,setPage] = useState(0); //페이지를 할당하기 위한 상태
   const [ref, InView] = useInView();
   const memberId = localStorage.getItem('memberId')
@@ -50,6 +53,7 @@ function Feed() {
           })
           setBookmarkStates(newBookmarkStates);
           console.log("실시간bookmarkStates: ", bookmarkStates)
+  
         }
         else if (name === '추천') {
           const response = await axios.get(`/api/articles/recommend?category=${category}&target=${timer}`);
@@ -67,9 +71,7 @@ function Feed() {
             }
           })
           setBookmarkStates(newBookmarkStates);
-          console.log("fetchRecommend: ", response.data);
-          console.log("scrap: ", response2.data);
-          console.log("추천bookmarkStates: ", bookmarkStates)
+          console.log('read Articles: ',readArticles)
         }
         else if(name==='스크랩') {
           const response2 = await axios.get(`/api/${memberId}/scrap`);
@@ -190,7 +192,7 @@ function Feed() {
       <div className='feed-content-wrap'>
         {Array.isArray(fs) && fs?.map((feed, index) => (
           feedState === '실시간' || feedState === '추천' ?
-            <FeedContent key={index} scrabList={scrabList} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)} />
+            <FeedContent key={index} readArticles={readArticles} scrabList={scrabList} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)} />
             :
             <FeedContent key={index} scrabList={scrabList} setFeedList={setFeedList} feed={feed} feedState={feedState} handleBookmark={handleBookmark} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} onClick={() => handleFeed(feed.uuidArticleId)} />
         ))}
