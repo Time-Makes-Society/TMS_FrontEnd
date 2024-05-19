@@ -17,6 +17,7 @@ function Main() {
   const readArticles = useSelector(state => state.readArticle.readAriticleList)
   const timer = localStorage.getItem('timer');
   const category = localStorage.getItem('category');
+  const memberNickname = localStorage.getItem('memberNickname');
   const navigate = useNavigate();
   console.log('timer', timer)
   console.log('category', category)
@@ -91,7 +92,11 @@ function Main() {
         <img src={random_image} className='random-image' alt='random-image' />
       </div>
 
-      <h3 className='title'>추천기사</h3>
+      <h3 className='title'>
+        <span className='memberNickname'>{memberNickname}</span>
+        님에게
+      </h3>
+      <h3 className='title'>맞춤 기사를 추천해드려요!</h3>
       <div className='recommend-wrap'>
         {recommendArticle.map((article, index) => (
           <Link key={article.id} to={`/feed_detail/${'추천'}/${article.id}`}>

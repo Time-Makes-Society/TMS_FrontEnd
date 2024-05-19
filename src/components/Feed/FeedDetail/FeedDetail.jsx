@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
-
-import backward from '../../../assets/backward.svg';
 import FeedFooter from './FeedFooter';
 import FeedContent from './FeedContent';
 import FeedHeader from './FeedHeader';
@@ -12,7 +10,8 @@ import TimeModal from '../../Modal/TimeModal';
 import CommentModal from '../../Modal/CommentModal';
 import FeedTimeModal from './FeedTimeModal';
 import {readAriticlesActions} from '../../../store/readArticles';
-function FeedDetail({ feedType }) {
+import { isGoToSimilarAction } from '../../../store/isGoToSimilar';
+function FeedDetail() {
   //feedType은 리덕스로 관리 -> 실시간, 추천 , 스크랩을 feedtype을 이용해서 렌더링
   const [feedContent, setFeedContent] = useState({});
   const [feedState, setFeedState] = useState(false);
@@ -29,11 +28,13 @@ function FeedDetail({ feedType }) {
 
   const dispatch = useDispatch();
   const readArticleArray = useSelector(state =>state.readArticle.readAriticleList)
-
+  const isClickSimilarButton = useSelector(state=>state.isGoToSimilar.isGoToSimilarState)
+  
   const { name,id } = useParams();
   const memberId = localStorage.getItem('memberId');
   const getTime = localStorage.getItem('readTime');
   const navigate = useNavigate();
+  
   
   const handleGoBack = async (identifier) => {
     setBackWardState(true)
@@ -63,7 +64,14 @@ function FeedDetail({ feedType }) {
     const accumulateTime = readTime+Number(getTime);
     localStorage.setItem('readTime',accumulateTime);
     if(identifier==='back'){
-      navigate('/home');
+      if(isClickSimilarButton){
+        navigate(-3)
+        dispatch(isGoToSimilarAction.toggle(false));
+      }
+      else{
+        navigate(-1);
+      }
+      
     }
     
   }
@@ -134,6 +142,7 @@ function FeedDetail({ feedType }) {
   }, [position]);
   useEffect(() => {
     console.log("read articles array: ",readArticleArray);
+    console.log('isClickSimilar: ',isClickSimilarButton);
     if (feedState) {
       // --임시 API 통신 code--
       const fetchFeedDetail = async () => {
