@@ -116,19 +116,25 @@ import React, { useState, useEffect } from "react"
 import Tms from "../../assets/start/TmsLogo.svg"
 import { useNavigate } from "react-router-dom"
 import IosModal from "../Modal/IosModal"
+import { browserName } from "react-browser-detection"
 
 function Start() {
   const [loginState, setLoginState] = useState(false)
   const navigate = useNavigate()
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [isiOS, setIsiOS] = useState(false)
+  const [isAndroid, setIsAndroid] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [isChrome, setIsChrome] = useState(false)
+  const [isPWA, setIsPWA] = useState(false)
 
-  // iOS 확인
   useEffect(() => {
     const userAgent = window.navigator.userAgent.toLowerCase()
     const isIOSDevice = /iphone|ipad|ipod/.test(userAgent)
+    const isAndroidDevice = /android/.test(userAgent)
+
     setIsiOS(isIOSDevice)
+    setIsAndroid(isAndroidDevice)
 
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault()
@@ -137,12 +143,27 @@ function Start() {
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt)
 
+    // PWA 실행 여부 확인
+    const checkPWA = () => {
+      const isInStandaloneMode =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone
+      setIsPWA(isInStandaloneMode)
+    }
+
+    checkPWA()
+
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
         handleBeforeInstallPrompt
       )
     }
+  }, [])
+
+  useEffect(() => {
+    // Check if the browser is Chrome
+    setIsChrome(browserName === "Chrome")
   }, [])
 
   // PWA 설치 이벤트 핸들러
@@ -157,8 +178,8 @@ function Start() {
         }
         setDeferredPrompt(null)
       })
-    } else if (isiOS) {
-      setShowModal(true) // iOS 기기에서 모달을 표시합니다.
+    } else if (isiOS || (isAndroid && !isChrome)) {
+      setShowModal(true) // iOS 또는 비Chrome Android 기기에서 모달을 표시합니다.
     }
   }
 
@@ -184,14 +205,16 @@ function Start() {
       >
         회원가입
       </button>
-      <button
-        type="button"
-        className="install-button"
-        onClick={handleInstallPWA}
-        disabled={!deferredPrompt && !isiOS} // deferredPrompt와 isiOS가 모두 없을 때 버튼 비활성화
-      >
-        앱으로 연결
-      </button>
+      {!isPWA && (
+        <button
+          type="button"
+          className="install-button"
+          onClick={handleInstallPWA}
+          disabled={!deferredPrompt && !(isiOS || (isAndroid && !isChrome))} // deferredPrompt와 isiOS가 모두 없을 때 버튼 비활성화
+        >
+          앱으로 연결
+        </button>
+      )}
       <IosModal show={showModal} onClose={() => setShowModal(false)} />
     </div>
   )
