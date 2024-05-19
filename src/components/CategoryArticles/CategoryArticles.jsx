@@ -18,6 +18,7 @@ import TimeModal from '../Modal/TimeModal';
 import { useInView } from 'react-intersection-observer';
 import CategoryList from '../Main/CategoryList';
 import { dummydata } from '../Feed/data';
+import { useSelector } from 'react-redux';
 function CategoryArticles() {
   const { name } = useParams();
   const categoryImage = {
@@ -39,6 +40,7 @@ function CategoryArticles() {
   const [scrabList, setScrabList] = useState([]);// 스크랩 데이터 받아옴
   const [bookmarkStates, setBookmarkStates] = useState([]); // 즐겨찾기 상태 true인지 false인지
   const [page, setPage] = useState(0); //페이지를 할당하기 위한 상태
+  const readArticles = useSelector(state => state.readArticle.readAriticleList)
   const [ref, InView] = useInView();
   const categoryPage= true;
   const memberId = localStorage.getItem('memberId')
@@ -178,7 +180,7 @@ function CategoryArticles() {
       <div className='feed-wrap'>
         <div className='feed-content-wrap'>
           {Array.isArray(fs) && fs?.map((feed, index) => (
-            <FeedContent key={index} scrabList={scrabList} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)} />
+            <FeedContent key={index} readArticles={readArticles} scrabList={scrabList} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)} />
           ))}
           <div className='scrollEnd' ref={ref}></div>
         </div>

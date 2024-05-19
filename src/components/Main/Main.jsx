@@ -38,6 +38,7 @@ function Main() {
     fetchLiveArticle();
     dispatch(timerActions.timer(timer))
     console.log('read Articles List: ', readArticles)
+    console.log('local storge 용량: ',JSON.stringify(localStorage).length)
   }, [])
   const handleGotoRandom = () => {
     const randomNumber = Math.floor(Math.random() * dummydata.length);
