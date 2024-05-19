@@ -90,6 +90,9 @@
                 font-weight: 700;
                 color: #ffffff;
                 &.active{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     left: 10px;
                     top: 10px;
                     font-size: 12px;

@@ -194,7 +194,8 @@ function Feed() {
           feedState === '실시간' || feedState === '추천' ?
             <FeedContent key={index} readArticles={readArticles} scrabList={scrabList} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)} />
             :
-            <FeedContent key={index} scrabList={scrabList} setFeedList={setFeedList} feed={feed} feedState={feedState} handleBookmark={handleBookmark} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} onClick={() => handleFeed(feed.uuidArticleId)} />
+           <FeedContent key={index} scrabList={scrabList} setFeedList={setFeedList} feed={feed} feedState={feedState} handleBookmark={handleBookmark} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} onClick={() => handleFeed(feed.uuidArticleId)} />
+           
         ))}
         <div className='scrollEnd' ref={ref}></div>
       </div>
