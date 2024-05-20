@@ -11,7 +11,7 @@ function FeedContent({ readArticles,feed, onClick, feedState, handleBookmark, bo
         <div className='feed-content' >
             <img src={feed.image} className='feed-image' alt='iamgeUrl' onClick={onClick} />
             <span className='text-on-backgorund'>{feed.articleTime}</span>
-            {readArticles?.includes(feed.id) ? <p className='text-on-backgorund active'>읽은기사</p> : ''}
+            {readArticles?.includes(feed.id||feed.uuidArticleId) ? <p className='text-on-backgorund active'>읽은기사</p> : ''}
             <div className='feed-desc-wrap'>
                 <p className='feed-desc-title'>{feed.title}</p>
                 <div className='feed-desc-footer'>

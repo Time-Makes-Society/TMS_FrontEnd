@@ -19,7 +19,6 @@ function Feed() {
   const memberId = localStorage.getItem('memberId')
   const timer = localStorage.getItem('timer');
   const category = localStorage.getItem('category');
-
   const navigate = useNavigate();
   const handleFeedState = (state) => {
     setFeedState(state);
@@ -36,7 +35,6 @@ function Feed() {
           const response2 = await axios.get(`/api/${memberId}/scrap`);
           setScrabList(response2.data);
           setLiveList([...liveList,...(response.data.articles)]);
-          //setFeedList([...feedList,...(response.data.articles)]);
           setPage((prev)=>prev+1);
           console.log('pageNumber: ',page)
           console.log("fetchLive: ", response.data.articles);
@@ -119,7 +117,7 @@ function Feed() {
             "articleId": id,
           })
           console.log("post 제거:", response.data)
-          //setFeedList((prev) => (prev.filter((item) => item.uuidArticleId !== id)));
+          setFeedList((prev) => (prev.filter((item) => item.uuidArticleId !== id)));
           setLiveList((prev) => (prev.filter((item) => item.uuidArticleId !== id)));
         }
         catch (error) {
@@ -180,7 +178,7 @@ function Feed() {
       }
     }
   }
-
+  
   const fs = feedState==='실시간' ? liveList:feedList
   return (
     <div className='feed-wrap'>
@@ -194,7 +192,7 @@ function Feed() {
           feedState === '실시간' || feedState === '추천' ?
             <FeedContent key={index} readArticles={readArticles} scrabList={scrabList} feedState={feedState} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} feed={feed} handleBookmark={handleBookmark} onClick={() => handleFeed(feed.id)} />
             :
-           <FeedContent key={index} scrabList={scrabList} setFeedList={setFeedList} feed={feed} feedState={feedState} handleBookmark={handleBookmark} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} onClick={() => handleFeed(feed.uuidArticleId)} />
+           <FeedContent key={index} readArticles={readArticles} scrabList={scrabList} setFeedList={setFeedList} feed={feed} feedState={feedState} handleBookmark={handleBookmark} bookmarkStates={bookmarkStates} setBookmarkStates={setBookmarkStates} onClick={() => handleFeed(feed.uuidArticleId)} />
            
         ))}
         <div className='scrollEnd' ref={ref}></div>

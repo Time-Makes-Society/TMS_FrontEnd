@@ -38,9 +38,7 @@ function FeedDetail() {
   
   const handleGoBack = async (identifier) => {
     setBackWardState(true)
-    if(name==='추천'){
-      dispatch(readAriticlesActions.plus(id))
-    }
+    
     try {
 
       const response = await axios.post('/api/members/readTime', {
@@ -61,6 +59,7 @@ function FeedDetail() {
     catch (error) {
       new Error(error);
     }
+    dispatch(readAriticlesActions.plus(id))
     const accumulateTime = readTime+Number(getTime);
     localStorage.setItem('readTime',accumulateTime);
     if(identifier==='back'){
@@ -193,13 +192,13 @@ function FeedDetail() {
       fetchScrap();
 
     }
-
   }, [feedState])
-
+  
   useEffect(()=>{
     const fetchLike =async()=>{
       const response = await axios.get(`/api/articles/like/${id}/${memberId}`)
       setLikeStates(response.data)
+      
     }
     fetchLike();
   },[likeStates])
