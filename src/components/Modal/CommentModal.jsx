@@ -150,7 +150,7 @@ function CommentModal({ id,setCommentState, articleId, handleComment }) {
               <div className='profile-image' style={{ backgroundImage: `url(${profileimage})` }} />
               <div className='comment-wrap'>
                 <p className='nickname'>
-                  {comment.memberName}
+                  {comment.memberNickname}
                   <img src={option} className='option' onClick={() => handleOptionToggle(comment.id,comment.memberName)} />
                  
                 </p>

@@ -65,6 +65,16 @@
                 font-size: 12px;
                 font-weight: 700;
                 color: #ffffff;
+                &.active{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    left: 10px;
+                    top: 125px;
+                    font-size: 11px;
+                    background-color:rgb(246, 244,245,0.8);
+                    color: #000000;
+                }
             }
             .live-content-image{
                 height: 165px;

@@ -60,6 +60,7 @@ function Main() {
             <div className='live-content-wrap' >
               <img src={article.image} alt="News Image" className='live-content-image' />
               <span className='time'>{article.articleTime}</span>
+              {readArticles?.includes(article.id) ? <p className='time active'>읽은 기사</p>: ''}
               <div className='live-content-title-wrap'>
                 <h1 >{article.title}</h1>
                 <p >{article.publisher}</p>
