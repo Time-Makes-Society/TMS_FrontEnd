@@ -1,221 +1,333 @@
-import React, { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
-import Footer from "../common/Footer"
-import FeedContent from "./FeedContent"
-import TimeModal from "../Modal/TimeModal"
-import { useInView } from "react-intersection-observer"
-import { useSelector } from "react-redux"
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Footer from '../common/Footer';
+import FeedContent from './FeedContent';
+import TimeModal from '../Modal/TimeModal';
+import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
+
+function parseSecondsToTime(secs) {
+  const minutes = Math.floor((secs % 3600) / 60);
+  const seconds = secs % 60;
+
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(seconds).padStart(2, '0');
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+function parseTimeToSeconds(timeString) {
+  const timeParts = timeString.split(':').map(Number);
+  if (timeParts.length === 2) {
+    // MM:SS
+    return timeParts[0] * 60 + timeParts[1];
+  } else if (timeParts.length === 3) {
+    // HH:MM:SS
+    return timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2];
+  } else {
+    return 0;
+  }
+}
+
 function Feed() {
-  const [feedState, setFeedState] = useState("실시간") //피드의 카테고리
-  const [feedList, setFeedList] = useState([]) // 피드 데이터 받아옴
-  const [liveList, setLiveList] = useState([]) // 실시간데이터
-  const [scrabList, setScrabList] = useState([]) // 스크랩 데이터 받아옴
-  const [bookmarkStates, setBookmarkStates] = useState([]) // 즐겨찾기 상태 true인지 false인지
+  const [feedState, setFeedState] = useState('실시간');
+  const [feedList, setFeedList] = useState([]);
+  const [liveList, setLiveList] = useState([]);
+  const [scrabList, setScrabList] = useState([]);
+  const [bookmarkStates, setBookmarkStates] = useState({});
+  const [page, setPage] = useState(0);
+  const [ref, InView] = useInView();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const readArticles = useSelector(
     (state) => state.readArticle.readAriticleList
-  )
+  );
+  const memberId = localStorage.getItem('memberId');
+  const category = localStorage.getItem('category');
+  const timer = localStorage.getItem('timer');
 
-  const [page, setPage] = useState(0) //페이지를 할당하기 위한 상태
-  const [ref, InView] = useInView()
-  const memberId = localStorage.getItem("memberId")
-  const timer = localStorage.getItem("timer")
-  const category = localStorage.getItem("category")
+  const [totalArticleTime, setTotalArticleTime] = useState(
+    parseTimeToSeconds(timer)
+  );
 
-  const navigate = useNavigate()
+  const recommendFeedCache = useRef(
+    JSON.parse(sessionStorage.getItem('recommendCache'))
+  );
+
   const handleFeedState = (state) => {
-    setFeedState(state)
-  }
+    setFeedState(state);
+  };
+
   const handleFeed = (id) => {
-    navigate(`/feed_detail/${feedState}/${id}`)
-  }
-  useEffect(() => {
-    // - api통신 -
-    const fetchLiveFeed = async (name) => {
-      try {
-        if (name === "실시간") {
-          const response = await axios.get(`/api/articles?page=${page}`)
-          const response2 = await axios.get(`/api/${memberId}/scrap`)
-          setScrabList(response2.data)
-          setLiveList([...liveList, ...response.data.articles])
-          //setFeedList([...feedList,...(response.data.articles)]);
-          setPage((prev) => prev + 1)
-          console.log("pageNumber: ", page)
-          console.log("fetchLive: ", response.data.articles)
-          console.log("fetchScrab: ", scrabList)
-          const newBookmarkStates = {}
-          liveList.forEach((article) => {
-            const id = article.id
-            const category = article.category
-            newBookmarkStates[id] = {
-              id: id,
-              category: category,
-              state: response2.data.some((scrab) => scrab.uuidArticleId === id),
-            }
-          })
-          setBookmarkStates(newBookmarkStates)
-          console.log("실시간bookmarkStates: ", bookmarkStates)
-        } else if (name === "추천") {
-          const response = await axios.get(
-            `/api/articles/recommend?category=${category}&target=${timer}`
-          )
-          const response2 = await axios.get(`/api/${memberId}/scrap`)
-          setFeedList(response.data)
-          setScrabList(response2.data)
-          const newBookmarkStates = {}
-        } else if (name === "추천") {
-          const response = await axios.get(
-            `/api/articles/recommend?category=${category}&target=${timer}`
-          )
-          const response2 = await axios.get(`/api/${memberId}/scrap`)
-          setFeedList(response.data)
-          setScrabList(response2.data)
-          const newBookmarkStates = {}
-          response.data.forEach((article) => {
-            const id = article.id
-            const category = article.category
-            newBookmarkStates[article.id] = {
-              id: id,
-              category: category,
-              state: scrabList?.some(
-                (scrab) => scrab.uuidArticleId === article.id
-              ),
-            }
-          })
-          setBookmarkStates(newBookmarkStates)
-          console.log("read Articles: ", readArticles)
-        } else if (name === "스크랩") {
-          const response2 = await axios.get(`/api/${memberId}/scrap`)
-          setFeedList(response2.data)
-          setScrabList(response2.data)
-          console.log("scrap: ", response2.data)
-          console.log("스크랩bookmarkStates: ", bookmarkStates)
-        }
-      } catch (error) {
-        new Error(error)
-      }
-    }
-    if (feedState === "실시간") {
-      fetchLiveFeed("실시간")
-    } else if (feedState === "추천") {
-      fetchLiveFeed("추천")
-    } else {
-      fetchLiveFeed("스크랩")
-      const newBookmarkStates = {}
-      scrabList.forEach((article) => {
-        const id = article.uuidArticleId
-        const category = article.category
+    navigate(`/feed_detail/${feedState}/${id}`);
+  };
+
+  const fetchLiveFeed = async () => {
+    try {
+      const response = await axios.get(`/api/articles?page=${page}`);
+      const response2 = await axios.get(`/api/${memberId}/scrap`);
+      setScrabList(response2.data);
+      const newLiveList = [...liveList, ...response.data.articles];
+      setLiveList(newLiveList);
+      setPage((prev) => prev + 1);
+
+      const newBookmarkStates = {};
+      newLiveList.forEach((article) => {
+        const id = article.id;
         newBookmarkStates[id] = {
           id: id,
-          category: category,
-          state: true,
-        }
-      })
-      setBookmarkStates(newBookmarkStates)
+          state: response2.data.some((scrab) => scrab.uuidArticleId === id),
+        };
+      });
+      setBookmarkStates(newBookmarkStates);
+    } catch (error) {
+      console.error(error);
     }
-  }, [feedState, InView])
+  };
+
+  const fetchRecommendFeed = async () => {
+    if (recommendFeedCache.current) {
+      setFeedList(recommendFeedCache.current);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `/api/articles/recommend?category=${category}&target=${timer}`
+      );
+      const response2 = await axios.get(`/api/${memberId}/scrap`);
+      setFeedList(response.data);
+      setScrabList(response2.data);
+      recommendFeedCache.current = response.data;
+      sessionStorage.setItem('recommendCache', JSON.stringify(response.data));
+
+      const newBookmarkStates = {};
+      response.data.forEach((article) => {
+        const id = article.id;
+        newBookmarkStates[id] = {
+          id: id,
+          state: response2.data.some((scrab) => scrab.uuidArticleId === id),
+        };
+      });
+      setBookmarkStates(newBookmarkStates);
+
+      const totalSeconds = response.data.reduce((acc, article) => {
+        return acc + parseTimeToSeconds(article.articleTime);
+      }, 0);
+
+      setTotalArticleTime(totalSeconds);
+      localStorage.setItem('totalArticleTime', totalSeconds);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchScrapFeed = async () => {
+    try {
+      const response = await axios.get(`/api/${memberId}/scrap`);
+      setFeedList(response.data);
+      setScrabList(response.data);
+
+      const newBookmarkStates = {};
+      response.data.forEach((article) => {
+        const id = article.uuidArticleId;
+        newBookmarkStates[id] = {
+          id: id,
+          state: true,
+        };
+      });
+      setBookmarkStates(newBookmarkStates);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (feedState === '실시간') {
+      fetchLiveFeed();
+    } else if (feedState === '추천') {
+      fetchRecommendFeed();
+    } else if (feedState === '스크랩') {
+      fetchScrapFeed();
+    }
+  }, [feedState, InView]);
+
+  useEffect(() => {
+    const storedTotalArticleTime = localStorage.getItem('totalArticleTime');
+    if (storedTotalArticleTime) {
+      setTotalArticleTime(storedTotalArticleTime);
+    }
+  }, []);
+
   const handleBookmark = (id) => {
-    //즐겨찾기 삭제하는 부분
-    if (feedState === "스크랩") {
+    // 즐겨찾기 삭제하는 부분
+    if (feedState === '스크랩') {
       const deleteBookmark = async () => {
         try {
-          const response = await axios.post("/api/scrap/cancel", {
+          const response = await axios.post('/api/scrap/cancel', {
             memberId: memberId,
             articleId: id,
-          })
-          console.log("post 제거:", response.data)
-          //setFeedList((prev) => (prev.filter((item) => item.uuidArticleId !== id)));
+          });
+          console.log('post 제거:', response.data);
+
+          setFeedList((prev) =>
+            prev.filter((item) => item.uuidArticleId !== id)
+          );
           setLiveList((prev) =>
             prev.filter((item) => item.uuidArticleId !== id)
-          )
+          );
         } catch (error) {
-          new Error(error)
+          new Error(error);
         }
-      }
-      deleteBookmark()
+      };
+      deleteBookmark();
     } else {
-      //즐겨찾기되어있는 경우
+      // 즐겨찾기되어있는 경우
       if (bookmarkStates[id]?.state) {
         const deleteBookmark = async () => {
           try {
-            const response = await axios.post("/api/scrap/cancel", {
+            const response = await axios.post('/api/scrap/cancel', {
               memberId: memberId,
               articleId: id,
-            })
-            console.log("post 제거: ", response.data)
+            });
+            console.log('post 제거: ', response.data);
             setBookmarkStates((prev) => {
-              const newBookmarkStates = { ...prev }
+              const newBookmarkStates = { ...prev };
               newBookmarkStates[id] = {
                 id: id,
                 state: !prev[id]?.state || false,
-              }
-              return newBookmarkStates
-            })
+              };
+              return newBookmarkStates;
+            });
           } catch (error) {
-            console.log(error)
+            console.log(error);
           }
-        }
-        deleteBookmark()
+        };
+        deleteBookmark();
       }
-      //즐겨찾기되어있지 않은 경우
+      // 즐겨찾기되어있지 않은 경우
       else {
         setBookmarkStates((prev) => {
-          const newBookmarkStates = { ...prev }
+          const newBookmarkStates = { ...prev };
           newBookmarkStates[id] = {
             id: id,
             state: !prev[id]?.state || true,
-          }
-          return newBookmarkStates
-        })
+          };
+          return newBookmarkStates;
+        });
         const postBookmark = async () => {
           try {
             const response = await axios.post(`/api/scrap`, {
               memberId: memberId,
               articleId: id,
-            })
-            console.log("post성공: ", response.data)
+            });
+            console.log('post성공: ', response.data);
           } catch (error) {
-            new Error(error)
+            new Error(error);
           }
-        }
-        postBookmark()
+        };
+        postBookmark();
       }
     }
-  }
+  };
 
-  const fs = feedState === "실시간" ? liveList : feedList
+  const handleRefreshRecommend = async () => {
+    try {
+      setLoading(true);
+      const modifiedTimer = localStorage.getItem('modifiedTimer');
+      const timer = parseSecondsToTime(modifiedTimer);
+      const response = await axios.get(
+        `/api/articles/recommend?category=${category}&target=${timer}`
+      );
+      const response2 = await axios.get(`/api/${memberId}/scrap`);
+      setFeedList(response.data);
+      setScrabList(response2.data);
+      recommendFeedCache.current = response.data;
+      sessionStorage.setItem('recommendCache', JSON.stringify(response.data));
+
+      const newBookmarkStates = {};
+      response.data.forEach((article) => {
+        const id = article.id;
+        newBookmarkStates[id] = {
+          id: id,
+          state: response2.data.some((scrab) => scrab.uuidArticleId === id),
+        };
+      });
+      setBookmarkStates(newBookmarkStates);
+
+      const totalSeconds = response.data.reduce((acc, article) => {
+        return acc + parseTimeToSeconds(article.articleTime);
+      }, 0);
+
+      setTotalArticleTime(totalSeconds);
+      localStorage.setItem('totalArticleTime', totalSeconds);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
+  const fs = feedState === '실시간' ? liveList : feedList;
+
   return (
     <div className="feed-wrap">
       <div className="feed-header-wrap">
         <button
           className={
-            feedState === "실시간" ? "feed-header active" : "feed-header"
+            feedState === '실시간' ? 'feed-header active' : 'feed-header'
           }
-          onClick={() => handleFeedState("실시간")}
+          onClick={() => handleFeedState('실시간')}
         >
           실시간
         </button>
         <button
           className={
-            feedState === "추천" ? "feed-header active" : "feed-header"
+            feedState === '추천' ? 'feed-header active' : 'feed-header'
           }
-          onClick={() => handleFeedState("추천")}
+          onClick={() => handleFeedState('추천')}
         >
           추천
         </button>
         <button
           className={
-            feedState === "스크랩" ? "feed-header active" : "feed-header"
+            feedState === '스크랩' ? 'feed-header active' : 'feed-header'
           }
-          onClick={() => handleFeedState("스크랩")}
+          onClick={() => handleFeedState('스크랩')}
         >
           스크랩
         </button>
       </div>
+
       <div className="feed-content-wrap">
+        {feedState === '추천' && (
+          <div className="recommend-info-warp">
+            <p className="recommend-info">
+              TMS가 설정한 시간과 카테고리에 맞게
+              <br />
+              읽을 만한 기사를 추천해드려요!
+            </p>
+            <div className="refresh-recommend-info">
+              <button
+                className="refresh-button"
+                onClick={handleRefreshRecommend}
+                disabled={loading} // 로딩 중에는 버튼 비활성화
+              >
+                {loading ? <span className="loader" /> : '새로 추천'}
+              </button>
+              <p className="refresh-all-time">
+                추천된 총 기사 시간:
+                <b>{parseSecondsToTime(totalArticleTime)}</b>
+              </p>
+            </div>
+          </div>
+        )}
+
         {Array.isArray(fs) &&
           fs?.map((feed, index) =>
-            feedState === "실시간" || feedState === "추천" ? (
+            feedState === '실시간' || feedState === '추천' ? (
               <FeedContent
                 key={index}
                 readArticles={readArticles}
@@ -230,6 +342,7 @@ function Feed() {
             ) : (
               <FeedContent
                 key={index}
+                readArticles={readArticles}
                 scrabList={scrabList}
                 setFeedList={setFeedList}
                 feed={feed}
@@ -241,13 +354,14 @@ function Feed() {
               />
             )
           )}
+
         <div className="scrollEnd" ref={ref}></div>
       </div>
 
       <TimeModal />
-      <Footer footerState={"feed"} />
+      <Footer footerState={'feed'} />
     </div>
-  )
+  );
 }
 
-export default Feed
+export default Feed;
