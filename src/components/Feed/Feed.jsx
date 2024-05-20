@@ -26,6 +26,7 @@ function Feed() {
   const handleFeed = (id) => {
     navigate(`/feed_detail/${feedState}/${id}`);
   }
+  //실시간 기사 렌더링
   useEffect(() => {
     // - api통신 -
     const fetchLiveFeed = async (name) => {
@@ -53,31 +54,7 @@ function Feed() {
           console.log("실시간bookmarkStates: ", bookmarkStates)
   
         }
-        else if (name === '추천') {
-          const response = await axios.get(`/api/articles/recommend?category=${category}&target=${timer}`);
-          const response2 = await axios.get(`/api/${memberId}/scrap`);
-          setFeedList(response.data);
-          setScrabList(response2.data);
-          const newBookmarkStates = {};
-          response.data.forEach((article) => {
-            const id = article.id;
-            const category = article.category;
-            newBookmarkStates[article.id] = {
-              id: id,
-              category: category,
-              state: scrabList?.some((scrab) => scrab.uuidArticleId === article.id),
-            }
-          })
-          setBookmarkStates(newBookmarkStates);
-          console.log('read Articles: ',readArticles)
-        }
-        else if(name==='스크랩') {
-          const response2 = await axios.get(`/api/${memberId}/scrap`);
-          setFeedList(response2.data)
-          setScrabList(response2.data)
-          console.log("scrap: ",response2.data)
-          console.log("스크랩bookmarkStates: ", bookmarkStates)
-        }
+        
       }
       catch (error) {
         new Error(error)
@@ -87,12 +64,44 @@ function Feed() {
       fetchLiveFeed('실시간');
 
     }
-    else if (feedState === '추천') {
-      fetchLiveFeed('추천');
-      
+    
+
+  }, [feedState,InView])
+  //추천기사,스크랩 렌더링
+  useEffect(()=>{
+    const fetchRecommendScrabFeed= async(name)=>{
+      if (name === '추천') {
+        const response = await axios.get(`/api/articles/recommend?category=${category}&target=${timer}`);
+        const response2 = await axios.get(`/api/${memberId}/scrap`);
+        setFeedList(response.data);
+        setScrabList(response2.data);
+        const newBookmarkStates = {};
+        response.data.forEach((article) => {
+          const id = article.id;
+          const category = article.category;
+          newBookmarkStates[article.id] = {
+            id: id,
+            category: category,
+            state: scrabList?.some((scrab) => scrab.uuidArticleId === article.id),
+          }
+        })
+        setBookmarkStates(newBookmarkStates);
+        console.log('read Articles: ',readArticles)
+      }
+      else if(name==='스크랩') {
+          const response2 = await axios.get(`/api/${memberId}/scrap`);
+          setFeedList(response2.data)
+          setScrabList(response2.data)
+          console.log("scrap: ",response2.data)
+          console.log("스크랩bookmarkStates: ", bookmarkStates)
+        }
     }
-    else {
-      fetchLiveFeed('스크랩');
+    if(feedState==='추천'){
+      fetchRecommendScrabFeed('추천');
+    }
+    
+    else if (feedState === '스크랩'){
+      fetchRecommendScrabFeed('스크랩');
       const newBookmarkStates = {};
       scrabList.forEach((article) => {
         const id = article.uuidArticleId;
@@ -106,7 +115,7 @@ function Feed() {
       setBookmarkStates(newBookmarkStates)
     }
 
-  }, [feedState,InView])
+  },[feedState])
   const handleBookmark = (id) => {
     //즐겨찾기 삭제하는 부분
     if (feedState === '스크랩') {
