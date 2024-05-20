@@ -69,7 +69,7 @@ function Feed() {
   }, [feedState,InView])
   //추천기사,스크랩 렌더링
   useEffect(()=>{
-    const fetchRecommendScrabFeed= async(name)=>{
+    const fetchRecommendScrabFeed = async(name)=>{
       if (name === '추천') {
         const response = await axios.get(`/api/articles/recommend?category=${category}&target=${timer}`);
         const response2 = await axios.get(`/api/${memberId}/scrap`);
