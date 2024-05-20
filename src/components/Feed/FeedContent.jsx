@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 
 import BookmarkEmpty from '../../assets/feed/bookmark-emptyy.svg';
@@ -31,9 +32,3 @@ function FeedContent({ readArticles,feed, onClick, feedState, handleBookmark, bo
 
                 <img src={Option} className='option' alt='option-image' />
             </div>
-
-        </div>
-    )
-}
-
-export default FeedContent

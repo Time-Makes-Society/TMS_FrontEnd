@@ -3,7 +3,9 @@ import {createSlice} from '@reduxjs/toolkit';
 const readList = localStorage.getItem('readArticles'); 
 
 const initialReadState = {
+
     readAriticleList: [],
+
 }
 
 const readAriticles =createSlice({

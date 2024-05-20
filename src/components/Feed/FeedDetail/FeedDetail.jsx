@@ -10,8 +10,10 @@ import TimeModal from '../../Modal/TimeModal';
 import CommentModal from '../../Modal/CommentModal';
 import FeedTimeModal from './FeedTimeModal';
 import {readAriticlesActions} from '../../../store/readArticles';
+
 import { isGoToSimilarAction } from '../../../store/isGoToSimilar';
 function FeedDetail() {
+
   //feedType은 리덕스로 관리 -> 실시간, 추천 , 스크랩을 feedtype을 이용해서 렌더링
   const [feedContent, setFeedContent] = useState({});
   const [feedState, setFeedState] = useState(false);
@@ -28,17 +30,21 @@ function FeedDetail() {
 
   const dispatch = useDispatch();
   const readArticleArray = useSelector(state =>state.readArticle.readAriticleList)
+
   const isClickSimilarButton = useSelector(state=>state.isGoToSimilar.isGoToSimilarState)
   
+
   const { name,id } = useParams();
   const memberId = localStorage.getItem('memberId');
   const getTime = localStorage.getItem('readTime');
   const navigate = useNavigate();
   
+
   
   const handleGoBack = async (identifier) => {
     setBackWardState(true)
     
+
     try {
 
       const response = await axios.post('/api/members/readTime', {
@@ -59,6 +65,7 @@ function FeedDetail() {
     catch (error) {
       new Error(error);
     }
+
     dispatch(readAriticlesActions.plus(id))
     const accumulateTime = readTime+Number(getTime);
     localStorage.setItem('readTime',accumulateTime);
@@ -141,7 +148,9 @@ function FeedDetail() {
   }, [position]);
   useEffect(() => {
     console.log("read articles array: ",readArticleArray);
+
     console.log('isClickSimilar: ',isClickSimilarButton);
+
     if (feedState) {
       // --임시 API 통신 code--
       const fetchFeedDetail = async () => {
