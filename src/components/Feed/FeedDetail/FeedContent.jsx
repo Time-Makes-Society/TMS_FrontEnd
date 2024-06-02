@@ -36,6 +36,10 @@ function FeedContent({
       <p className="feedDetail-content-reporter">
         평균 읽는 시간: {feedContent.articleTime}
       </p>
+      <p className="similarity">
+        원문기사와 요약기사의 <span>유사도:</span> <b>{similarity}%</b>
+      </p>
+
       <div className="like-comment-wrap">
         <motion.div
           whileTap={{ scale: 1.5 }}
@@ -75,12 +79,9 @@ function FeedContent({
           feedContent.content
         )}
       </p>
-      {feedState && (
-        <p>
-          원문기사와 요약기사의 유사도: <b>{similarity}%</b>
-        </p>
-      )}
-      {feedState && <button onClick={onClickGptButton}>다시 요약하기</button>}
+      <button className="reSimilarity" onClick={onClickGptButton}>
+        다시 요약하기
+      </button>
     </div>
   );
 }

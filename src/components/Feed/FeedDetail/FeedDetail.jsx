@@ -265,6 +265,9 @@ function FeedDetail() {
         handleContentSizeUpDown={handleContentSizeUpDown}
         handleFeedState={handleFeedState}
         feedState={feedState}
+        similarity={similarity}
+        setSimilarity={setSimilarity}
+        onClickGptButton={onClickGptButton}
       />
     </>
   );
