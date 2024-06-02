@@ -79,9 +79,6 @@ function FeedContent({
           feedContent.content
         )}
       </p>
-      <button className="reSimilarity" onClick={onClickGptButton}>
-        다시 요약하기
-      </button>
     </div>
   );
 }
