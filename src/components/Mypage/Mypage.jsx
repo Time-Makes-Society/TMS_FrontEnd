@@ -45,20 +45,12 @@ function Mypage() {
   };
 
   // 누적시간 string -> number로 바꾸는 작업
-  // 왜 안되지 시발거
+
   const convertReadTime = (time, index) => {
     const [hour, minutes, seconds] = time?.split(':');
     const totalTime =
       parseInt(hour) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
     return totalTime;
-  };
-  const updatedReadTime = () => {
-    const totalTime = readTimeBar.map((item, index) => ({
-      ...item,
-      time: convertReadTime(item.time, index),
-    }));
-    setNewReadData(totalTime);
-    //setReadTimeBar(totalTime);
   };
   console.log('readTimeBar', newReadData);
 
