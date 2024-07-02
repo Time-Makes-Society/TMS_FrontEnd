@@ -1,18 +1,125 @@
-# vite 사용
-- webpack 대신 빌드 속도가 빠른 vite를 사용하였다.
+## :fire: 팀명 및 프로젝트 소개
 
-# 추가 라이브러리
+**TimeMakesSociety**, 대중교통이용시 발생하는 이동시간을 효율적으로 활용하고자 하는 사용자들의 니즈를 파악하고 시사에 대한 관심을 유도하기위해 이동시간동안 사용자가 원하는 카테고리를 맞춤추천 해주는 뉴스 요약 서비스를 기획을 하게 되었다.
 
-1. sass
-2. redux 툴킷
-3. react-router-dom
-4. 프록시 미들웨어
-5. 프레이머 모션
-# 최적화
+<br>
 
-1. lazy를 이용한 최적화 진행
+<br><br>
 
-# 와이어프레임
-![image](https://github.com/Time-Makes-Society/TMS_FrontEnd/assets/100831607/18165795-e9b3-4f19-9ecf-8eed89a2feeb)
-![image](https://github.com/Time-Makes-Society/TMS_FrontEnd/assets/100831607/b81f72da-ce32-4ea7-a7f7-7bae32742b35)
-![image](https://github.com/Time-Makes-Society/TMS_FrontEnd/assets/100831607/32f00d12-5fe6-4648-98c9-16b78059ef08)
+## ✨ 주요 기능
+
+**뉴스 기사요약**  
+: 기존 뉴스기사의 내용을 요약해주고 사용자가 읽었던 기사는 읽음처리를 하여 보여준다. 또한 사용자들이 기사를 읽는 평균적인 시간을 알려준다.( 기사를 읽는 시간은 통계로 나와있는 자료를 바탕으로 설정함.)
+
+**카테고리 기반, 시간설정에 따른 맞춤 추천 기사**  
+: 사용자가 시간과 카테고리를 설정하여 이에 따른 뉴스기사들이 맞춤추천이 된다. 
+
+**읽은 뉴스기사 통계**  
+: 사용자가 읽었던 뉴스기사들 중 TOP4의 카테고리를 알려준다. 또한 사용자가 뉴스기사를 읽는동안 시간이 카운트되고, 뉴스기사를 다 읽게 되면 마이페이지에서 얼마큼 사용자가 기사를 읽었는지 시간을 카테고리별로 알려준다.
+
+<br>
+
+<br><br>
+
+## 🦾 주요 기술
+###  Front
+* <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/>
+* <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/>
+* <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
+* <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Framer-0055FF?style=for-the-badge&logo=Framer&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white"/>
+
+###  Back
+* <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"/>
+* <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white"/>
+* <img src="https://img.shields.io/badge/JPA-6DB33F?style=for-the-badge&logo=JPA&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=Ubuntu&logoColor=white"/>
+* <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"/>
+* <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+
+<br>
+
+###  Collaboration
+* <img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=Github&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"/>
+* <img src="https://img.shields.io/badge/Notion-black?style=for-the-badge&logo=Notion&logoColor=white"/>
+<br>
+
+##  와이어프레임
+
+
+<details>
+  <summary><b>와이어프레임</b></summary>
+  <div markdown="1">
+
+  <div align="center">
+
+  </div>
+  </div>
+</details>
+
+<br><br>
+
+##  디자인
+<table>
+  <tr>
+    <td>LoginPage1</td>
+    <td>로그인 후Page1</td>
+    <td>로그인 후Page2</td>
+    <td>로그인 후Page3</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/3f88efa5-4ef4-48be-873a-f12436765d26"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/6670399a-d33e-44b4-a39b-bf59498fb46c"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/acacebc2-97c5-4c16-83a8-c766bb5ed7e7"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/a743c9aa-4de7-444e-ad5b-d0f396438c0c"  width="100%"/></td>
+  </tr>
+   <tr>
+    <td>카테고리 페이지</td>
+    <td>시간설정 페이지</td>
+    <td>메인페이지</td>
+    <td>기사 상세페이지</td>
+  </tr>
+   <tr>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/d748144e-b4a1-4b4d-9a51-a9105f4de08d"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/997fbbfe-a2f7-4bf5-bea7-114603a9b5ec"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/8e88d2df-c8ab-44dd-99d3-2cdcb84557ba"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/4fe857c6-dee5-421b-9411-7b12c48d35ec"  width="100%"/></td>
+
+
+  </tr>
+</table>
+
+
+
+<br><br>
+
+##  실행 화면
+* **Phone** :iphone:
+
+* ##  구조도
+
+<div align="center">
+  
+
+
+</div>
+
+
+<br>
+
+
+<br><br>
+
+##  팀원
+<table>
+  <tr> 
+    <td align='center'><strong>임형준(팀장,FE)</strong></td> 
+    <td align='center'><strong>김승찬(BE)</strong></td> 
+    <td align='center'><strong>박혜정(BE)</strong></td> 
+  </tr>
+</table>
