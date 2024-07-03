@@ -31,6 +31,17 @@
 <br>
 
 <br><br>
+## 레퍼지토리
+
+**프론트엔드**  
+: https://github.com/Time-Makes-Society/TMS_FrontEnd
+
+**백엔드**  
+: https://github.com/Time-Makes-Society/TMS_BackEnd
+
+
+
+<br>
 
 ## 🦾 주요 기술
 ###  Front
@@ -68,6 +79,11 @@
   <div markdown="1">
 
   <div align="center">
+    <img src="https://github.com/Time-Makes-Society/.github/assets/100831607/deea8d4e-f9b0-44c9-ba1c-768623cde52b"/>
+    <img src="https://github.com/Time-Makes-Society/.github/assets/100831607/7e3778ab-1598-41e5-9916-c60444721a74"/>
+    <img src="https://github.com/Time-Makes-Society/.github/assets/100831607/adc52a20-8ca8-4376-b3c3-0b935b59fc56"/>
+
+
 
   </div>
   </div>
@@ -93,17 +109,41 @@
     <td>카테고리 페이지</td>
     <td>시간설정 페이지</td>
     <td>메인페이지</td>
-    <td>기사 상세페이지</td>
+    <td>기사 상세페이지(원문)</td>
   </tr>
    <tr>
     <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/d748144e-b4a1-4b4d-9a51-a9105f4de08d"  width="100%"/></td>
     <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/997fbbfe-a2f7-4bf5-bea7-114603a9b5ec"  width="100%"/></td>
-    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/8e88d2df-c8ab-44dd-99d3-2cdcb84557ba"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/3810dd4c-d675-40f1-a36d-a42160bacdda"  width="100%"/></td>
     <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/4fe857c6-dee5-421b-9411-7b12c48d35ec"  width="100%"/></td>
+  </tr>
+
+   <tr>
+    <td>기사 상세페이지(요약)</td>
+    <td>유사한 기사페이지</td>
+    <td>피드페이지(추천)</td>
+    <td>피드페이지(스크랩)</td>
+  </tr>
+   <tr>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/a1f3d6a7-a966-4d8a-b25a-3bf97f162626"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/390cefb4-5a1c-4f1e-8149-ecd7a96938f9"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/508e7766-f1d2-42c9-b4d9-47891c44e61d"  width="100%"/></td>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/ba217927-0a5a-47a2-bcef-1f845d6b3a59"  width="100%"/></td>
+  </tr>
+   <tr>
+    <td>마이페이지(요약)</td>
+    
+  </tr>
+   <tr>
+    <td><img src="https://github.com/Time-Makes-Society/.github/assets/100831607/7f3acdd1-296f-4c17-998c-a849aa4cb471"  width="100%"/></td>
 
 
   </tr>
 </table>
+
+
+
+
 
 
 
@@ -112,10 +152,11 @@
 ##  실행 화면
 * **Phone** :iphone:
 
-* ##  구조도
+##  구조도
 
 <div align="center">
-  
+  <img src="https://github.com/Time-Makes-Society/.github/assets/100831607/de82fa3f-53c9-45bd-b218-8332f9373608"/>
+
 
 
 </div>
