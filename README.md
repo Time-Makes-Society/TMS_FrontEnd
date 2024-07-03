@@ -31,17 +31,7 @@
 <br>
 
 <br><br>
-## 레퍼지토리
 
-**프론트엔드**  
-: https://github.com/Time-Makes-Society/TMS_FrontEnd
-
-**백엔드**  
-: https://github.com/Time-Makes-Society/TMS_BackEnd
-
-
-
-<br>
 
 ## 🦾 주요 기술
 ###  Front
